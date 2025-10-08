@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kertas Batu Gunting - Supabase</title>
+    <style>
+        /* CSS TETAP SAMA PERSIS SEPERTI CODE KAMU */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .section {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            display: none;
+        }
+        
+        .active {
+            display: block;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
+        input[type="number"] {
+            text-align: right;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+        
+        .btn {
+            padding: 15px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin: 5px 0;
+        }
+        
+        .btn-primary {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #218838;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+        
+        .btn-warning {
+            background: #ffc107;
+            color: black;
+        }
+        
+        .btn-warning:hover {
+            background: #e0a800;
+        }
+        
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .btn-info {
+            background: #17a2b8;
+            color: white;
+        }
+        
+        .btn-info:hover {
+            background: #138496;
+        }
+        
+        .room-info {
+            background: #d4edda;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .player-list {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+        }
+        
+        .player {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            background: white;
+            margin: 0 5px;
+            border-radius: 8px;
+            border: 2px dashed #ddd;
+        }
+        
+        .player.ready {
+            border: 2px solid #28a745;
+            background: #f8fff9;
+        }
+        
+        .player.choosed {
+            border: 2px solid #007bff;
+            background: #f0f8ff;
+        }
+        
+        .player.confirmed {
+            border: 2px solid #ffc107;
+            background: #fffbf0;
+        }
+        
+        .game-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .pilihan-section {
+            display: none;
+        }
+        
+        .pilihan-buttons {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        .btn-pilihan {
+            flex: 1;
+            padding: 12px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .btn-pilihan:hover {
+            background: #0056b3;
+        }
+        
+        .btn-pilihan.selected {
+            background: #0056b3;
+            border: 3px solid #ffc107;
+        }
+        
+        .btn-pilihan:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        
+        .confirmation-section {
+            display: none;
+            text-align: center;
+            padding: 15px;
+            background: #e7f3ff;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        
+        .hasil-section {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            background: #e9ecef;
+        }
+        
+        .menang { color: #28a745; font-weight: bold; }
+        .kalah { color: #dc3545; font-weight: bold; }
+        .seri { color: #ffc107; font-weight: bold; }
+        
+        .admin-fee {
+            background: #fff3cd;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        
+        .room-code {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            letter-spacing: 3px;
+            background: #007bff;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            position: relative;
+        }
+
+        .copy-btn {
+            background: #17a2b8;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .copy-btn:hover {
+            background: #138496;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            text-align: center;
+            display: none;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            text-align: center;
+            display: none;
+        }
+
+        .choice-preview {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: #fff3cd;
+            border-radius: 8px;
+        }
+
+        .room-stats {
+            background: #e7f3ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .stats-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #007bff;
+            margin: 10px 0;
+        }
+
+        .stats-label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .join-info {
+            background: #fff3cd;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            text-align: center;
+            font-size: 14px;
+            color: #856404;
+        }
+
+        /* FITUR BARU: Chat Room Styles */
+        .chat-section {
+            margin: 15px 0;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: #007bff;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .chat-messages {
+            height: 150px;
+            overflow-y: auto;
+            padding: 10px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .chat-message {
+            margin-bottom: 8px;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .chat-message.system {
+            background: #fff3cd;
+            text-align: center;
+            font-style: italic;
+            color: #856404;
+        }
+
+        .chat-message.player {
+            background: #e7f3ff;
+            border-left: 3px solid #007bff;
+        }
+
+        .chat-message.opponent {
+            background: #f8fff9;
+            border-left: 3px solid #28a745;
+        }
+
+        .chat-input-container {
+            display: flex;
+            padding: 10px;
+            background: white;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .chat-send-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .chat-send-btn:hover {
+            background: #218838;
+        }
+
+        .chat-send-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+
+        /* FITUR BARU: Sound Controls */
+        .sound-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .sound-btn {
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+
+        .sound-btn:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .sound-btn.muted {
+            background: #ffc107;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 10px;
+            color: #666;
+        }
+    </style>
+    
+    <!-- SUPABASE SDK -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="sound-controls">
+        <button class="sound-btn" id="soundToggle" onclick="toggleSound()">🔊</button>
+    </div>
+
+    <div class="container">
+        <h1>🎮 Kertas Batu Gunting</h1>
+        <h3 style="text-align: center; color: #666;">Powered by Supabase</h3>
+        
+        <div class="error-message" id="errorMessage"></div>
+        <div class="success-message" id="successMessage"></div>
+        
+        <!-- Section 1: Create or Join Room -->
+        <div class="section active" id="sectionLobby">
+            <div class="input-group">
+                <label>Nama Player:</label>
+                <input type="text" id="playerName" placeholder="Masukkan nama kamu" value="cil">
+            </div>
+            
+            <button class="btn btn-primary" onclick="showCreateRoom()">➕ CREATE ROOM</button>
+            <button class="btn btn-secondary" onclick="showJoinRoom()">🔗 JOIN ROOM</button>
+
+            <div class="room-stats">
+                <h4>📊 Room Aktif Saat Ini</h4>
+                <div class="stats-number" id="roomCount">0</div>
+                <div class="stats-label">Room Menunggu Player</div>
+                
+                <div class="join-info">
+                    💡 <strong>Cara Main:</strong><br>
+                    1. Buat room baru ATAU join dengan kode room<br>
+                    2. Share kode room ke teman untuk bermain
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 2: Create Room -->
+        <div class="section" id="sectionCreate">
+            <h3>Buat Room Baru</h3>
+            <div class="input-group">
+                <label>Taruhan:</label>
+                <input type="text" id="createTaruhan" placeholder="Contoh: 10.000" value="5.000" oninput="formatRupiahInput(this)">
+            </div>
+            <div class="input-group">
+                <label>Room Password (optional):</label>
+                <input type="text" id="roomPassword" placeholder="Password room (bisa dikosongkan)">
+            </div>
+            <button class="btn btn-primary" onclick="createRoom()">🎯 BUAT ROOM</button>
+            <button class="btn btn-secondary" onclick="backToLobby()">⬅ KEMBALI</button>
+        </div>
+        
+        <!-- Section 3: Join Room -->
+        <div class="section" id="sectionJoin">
+            <h3>Join Room</h3>
+            
+            <div class="join-info">
+                💡 <strong>Minta kode room</strong> dari teman yang sudah buat room
+            </div>
+            
+            <div class="input-group">
+                <label>Kode Room:</label>
+                <input type="text" id="joinRoomCode" placeholder="Masukkan kode room dari teman" style="text-transform: uppercase;">
+            </div>
+            <div class="input-group">
+                <label>Password Room (jika ada):</label>
+                <input type="text" id="joinPassword" placeholder="Masukkan password room">
+            </div>
+            <button class="btn btn-primary" onclick="joinRoom()">🎮 JOIN ROOM</button>
+            <button class="btn btn-secondary" onclick="backToLobby()">⬅ KEMBALI</button>
+        </div>
+        
+        <!-- Section 4: Game Room -->
+        <div class="section" id="sectionGame">
+            <div class="room-code" id="displayRoomCode">
+                ROOM-XXXX
+                <br>
+                <button class="copy-btn" onclick="copyRoomCode()">📋 Copy Kode Room</button>
+            </div>
+            
+            <div class="room-info">
+                <p>Taruhan: <strong id="roomTaruhan">Rp 0</strong></p>
+                <p>Status: <strong id="roomStatus">Menunggu player...</strong></p>
+                <p>Pemain: <span id="playerCount">1/2</span></p>
+            </div>
+            
+            <!-- FITUR BARU: Chat Room -->
+            <div class="chat-section" id="chatSection">
+                <div class="chat-header">💬 Chat Room</div>
+                <div class="chat-messages" id="chatMessages">
+                    <div class="chat-message system">
+                        💡 Selamat datang di chat room! Gunakan untuk berkomunikasi dengan lawan.
+                    </div>
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" class="chat-input" id="chatInput" placeholder="Ketik pesan..." maxlength="100">
+                    <button class="chat-send-btn" id="chatSendBtn" onclick="sendChatMessage()">Kirim</button>
+                </div>
+            </div>
+            
+            <div class="player-list">
+                <div class="player" id="player1Slot">
+                    <h4>Player 1</h4>
+                    <div id="player1Name">-</div>
+                    <div id="player1Status">Menunggu...</div>
+                </div>
+                <div class="player" id="player2Slot">
+                    <h4>Player 2</h4>
+                    <div id="player2Name">-</div>
+                    <div id="player2Status">Menunggu...</div>
+                </div>
+            </div>
+            
+            <div class="game-controls" id="gameControls">
+                <!-- Pilihan Section -->
+                <div class="pilihan-section" id="pilihanSection">
+                    <h4>Pilih Salah Satu:</h4>
+                    <div class="pilihan-buttons">
+                        <button class="btn-pilihan" onclick="selectChoice('kertas')">📄 Kertas</button>
+                        <button class="btn-pilihan" onclick="selectChoice('batu')">🪨 Batu</button>
+                        <button class="btn-pilihan" onclick="selectChoice('gunting')">✂️ Gunting</button>
+                    </div>
+                </div>
+                
+                <!-- Confirmation Section -->
+                <div class="confirmation-section" id="confirmationSection">
+                    <div class="choice-preview" id="choicePreview">
+                        Anda memilih: <span id="selectedChoice">-</span>
+                    </div>
+                    <p>Yakin dengan pilihan ini?</p>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn btn-warning" onclick="confirmChoice()">✅ YA, READY!</button>
+                        <button class="btn btn-secondary" onclick="cancelChoice()">❌ BATAL</button>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn btn-danger" onclick="leaveRoom()">🚪 KELUAR ROOM</button>
+            
+            <div class="hasil-section" id="hasilSection" style="display: none;">
+                <h3>🏆 HASIL PERMAINAN</h3>
+                <div id="hasilPertandingan"></div>
+                <div id="statusPemenang"></div>
+                <div class="admin-fee" id="pembayaranInfo"></div>
+                <button class="btn btn-primary" onclick="rematch()">🔄 MAIN LAGI</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==================== SUPABASE CONFIG ====================
+        const SUPABASE_URL = 'https://awaljlzsyjlhojwonejy.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF3YWxqbHpzeWpsaG9qd29uZWp5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk5MTUzNTAsImV4cCI6MjA3NTQ5MTM1MH0._COSdIe-t6YIUyb4LVkxwJ8pD4e_lWGycY1FDGw8YU0';
+        
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // ==================== GAME DATA ====================
+        let gameData = {
+            playerName: 'cil',
+            roomCode: '',
+            isCreator: false,
+            playerNumber: 0,
+            tempChoice: null,
+            soundEnabled: true,
+            roomSubscription: null
+        };
+
+        // ==================== SUPABASE FUNCTIONS ====================
+        async function getRoom(roomCode) {
+            try {
+                const { data, error } = await supabase
+                    .from('rooms')
+                    .select('*')
+                    .eq('code', roomCode)
+                    .single();
+                    
+                if (error) {
+                    console.log('Room not found:', roomCode, error);
+                    return null;
+                }
+                return data.data;
+            } catch (error) {
+                console.error('Error getting room:', error);
+                return null;
+            }
+        }
+
+        async function saveRoom(roomCode, roomData) {
+            try {
+                const { data, error } = await supabase
+                    .from('rooms')
+                    .upsert({
+                        code: roomCode,
+                        data: roomData,
+                        updated_at: new Date().toISOString()
+                    }, {
+                        onConflict: 'code'
+                    });
+                    
+                if (error) {
+                    console.error('Supabase save error:', error);
+                    return false;
+                }
+                console.log('Room saved successfully:', roomCode);
+                return true;
+            } catch (error) {
+                console.error('Error saving room:', error);
+                return false;
+            }
+        }
+
+        async function deleteRoom(roomCode) {
+            try {
+                const { error } = await supabase
+                    .from('rooms')
+                    .delete()
+                    .eq('code', roomCode);
+                    
+                return !error;
+            } catch (error) {
+                console.error('Error deleting room:', error);
+                return false;
+            }
+        }
+
+        async function getAllRooms() {
+            try {
+                const { data, error } = await supabase
+                    .from('rooms')
+                    .select('code, data');
+                    
+                if (error) {
+                    console.error('Error getting rooms:', error);
+                    return {};
+                }
+                
+                const roomsMap = {};
+                if (data) {
+                    data.forEach(room => {
+                        roomsMap[room.code] = room.data;
+                    });
+                }
+                return roomsMap;
+            } catch (error) {
+                console.error('Error getting all rooms:', error);
+                return {};
+            }
+        }
+
+        function startRoomListener(roomCode, callback) {
+            console.log('Starting realtime listener for:', roomCode);
+            
+            // Unsubscribe existing listener if any
+            if (gameData.roomSubscription) {
+                gameData.roomSubscription.unsubscribe();
+            }
+
+            const subscription = supabase
+                .channel('room-changes')
+                .on('postgres_changes', 
+                    {
+                        event: '*',
+                        schema: 'public',
+                        table: 'rooms',
+                        filter: `code=eq.${roomCode}`
+                    },
+                    (payload) => {
+                        console.log('Realtime update:', payload);
+                        if (payload.new && payload.new.data) {
+                            callback(payload.new.data);
+                        }
+                    }
+                )
+                .subscribe((status) => {
+                    console.log('Subscription status:', status);
+                });
+
+            gameData.roomSubscription = subscription;
+            return subscription;
+        }
+
+        function stopRoomListener() {
+            if (gameData.roomSubscription) {
+                gameData.roomSubscription.unsubscribe();
+                gameData.roomSubscription = null;
+                console.log('Room listener stopped');
+            }
+        }
+
+        // ==================== GAME FUNCTIONS ====================
+        function calculateAdminFee(taruhan) {
+            if (taruhan >= 1 && taruhan <= 9500) return 1000;
+            if (taruhan >= 10000 && taruhan <= 19900) return 2000;
+            if (taruhan >= 20000 && taruhan <= 29900) return 3000;
+            if (taruhan >= 30000 && taruhan <= 39900) return 4000;
+            if (taruhan >= 40000 && taruhan <= 49900) return 5000;
+            if (taruhan >= 50000 && taruhan <= 59900) return 6000;
+            if (taruhan >= 60000 && taruhan <= 69900) return 7000;
+            if (taruhan >= 70000 && taruhan <= 79900) return 8000;
+            if (taruhan >= 80000 && taruhan <= 89900) return 9000;
+            if (taruhan >= 90000 && taruhan <= 99900) return 10000;
+            if (taruhan >= 100000) return Math.floor(taruhan / 10000) * 1000;
+            return 1000;
+        }
+
+        function playSound() {
+            if (!gameData.soundEnabled) return;
+            // Simple sound implementation
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = 800;
+                oscillator.type = 'sine';
+                
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.1);
+            } catch (e) {
+                console.log('Sound not supported');
+            }
+        }
+
+        function toggleSound() {
+            gameData.soundEnabled = !gameData.soundEnabled;
+            const soundBtn = document.getElementById('soundToggle');
+            soundBtn.textContent = gameData.soundEnabled ? '🔊' : '🔇';
+            soundBtn.classList.toggle('muted', !gameData.soundEnabled);
+            showSuccess(gameData.soundEnabled ? 'Sound diaktifkan' : 'Sound dimatikan');
+            playSound();
+        }
+
+        function formatRupiahInput(input) {
+            let value = input.value.replace(/[^\d]/g, '');
+            if (value) {
+                value = parseInt(value).toLocaleString('id-ID');
+                input.value = value;
+            }
+        }
+
+        function parseRupiahInput(inputValue) {
+            return parseInt(inputValue.replace(/[^\d]/g, '') || 0);
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+            playSound();
+        }
+
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMessage');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 3000);
+        }
+
+        function generateRoomCode() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            let result = '';
+            for (let i = 0; i < 4; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        function showCreateRoom() {
+            const playerName = document.getElementById('playerName').value.trim();
+            if (!playerName) {
+                showError('Masukkan nama dulu!');
+                document.getElementById('playerName').focus();
+                return;
+            }
+            gameData.playerName = playerName;
+            showSection('sectionCreate');
+            playSound();
+        }
+
+        function showJoinRoom() {
+            const playerName = document.getElementById('playerName').value.trim();
+            if (!playerName) {
+                showError('Masukkan nama dulu!');
+                document.getElementById('playerName').focus();
+                return;
+            }
+            gameData.playerName = playerName;
+            updateRoomStats();
+            showSection('sectionJoin');
+            playSound();
+        }
+
+        function backToLobby() {
+            showSection('sectionLobby');
+            updateRoomStats();
+            playSound();
+        }
+
+        async function updateRoomStats() {
+            try {
+                const rooms = await getAllRooms();
+                const roomCountElement = document.getElementById('roomCount');
+                
+                const activeRooms = Object.entries(rooms).filter(([code, room]) => {
+                    return room && room.status === 'waiting' && !room.player2;
+                });
+                
+                roomCountElement.textContent = activeRooms.length;
+            } catch (error) {
+                console.error('Error updating room stats:', error);
+            }
+        }
+
+        // CREATE ROOM dengan Supabase - DIPERBAIKI
+        async function createRoom() {
+            const taruhanInput = document.getElementById('createTaruhan').value;
+            const password = document.getElementById('roomPassword').value;
+            
+            const taruhan = parseRupiahInput(taruhanInput);
+            if (!taruhan || taruhan <= 0) {
+                showError('Masukkan jumlah taruhan yang valid!');
+                return;
+            }
+
+            if (taruhan < 1000) {
+                showError('Taruhan minimal Rp 1.000!');
+                return;
+            }
+
+            let roomCode;
+            let attempts = 0;
+            let rooms = await getAllRooms();
+            
+            do {
+                roomCode = generateRoomCode();
+                attempts++;
+            } while (rooms[roomCode] && attempts < 10);
+
+            if (attempts >= 10) {
+                showError('Gagal membuat room, coba lagi!');
+                return;
+            }
+
+            gameData.roomCode = roomCode;
+            gameData.isCreator = true;
+            gameData.playerNumber = 1;
+
+            const roomData = {
+                password: password,
+                taruhan: taruhan,
+                player1: { 
+                    name: gameData.playerName, 
+                    pilihan: null, 
+                    confirmed: false
+                },
+                player2: null,
+                status: 'waiting',
+                hasil: null,
+                createdAt: new Date().toISOString(),
+                showChoices: false,
+                showResult: false,
+                chatMessages: [{
+                    type: 'system',
+                    message: `🎮 ${gameData.playerName} membuat room!`,
+                    timestamp: new Date().toISOString()
+                }]
+            };
+
+            console.log('Creating room:', roomCode, roomData);
+            
+            const success = await saveRoom(roomCode, roomData);
+            if (success) {
+                showSuccess('Room ' + roomCode + ' berhasil dibuat! 🎉');
+                enterGameRoom();
+                playSound();
+            } else {
+                showError('Gagal membuat room! Coba lagi.');
+            }
+        }
+
+        // JOIN ROOM dengan Supabase - DIPERBAIKI
+        async function joinRoom() {
+            const roomCodeInput = document.getElementById('joinRoomCode');
+            const roomCode = roomCodeInput.value.toUpperCase().trim();
+            const password = document.getElementById('joinPassword').value;
+            
+            if (!roomCode) {
+                showError('Masukkan kode room!');
+                roomCodeInput.focus();
+                return;
+            }
+
+            if (roomCode.length !== 4) {
+                showError('Kode room harus 4 karakter!');
+                roomCodeInput.focus();
+                return;
+            }
+
+            console.log('Joining room:', roomCode);
+            
+            const room = await getRoom(roomCode);
+            if (!room) {
+                showError('Room ' + roomCode + ' tidak ditemukan! Pastikan kode room benar.');
+                return;
+            }
+
+            if (room.password && room.password !== password) {
+                showError('Password room salah!');
+                return;
+            }
+
+            if (room.player2) {
+                showError('Room sudah penuh!');
+                return;
+            }
+
+            if (room.status === 'finished') {
+                showError('Room sudah selesai! Buat room baru atau join room lain.');
+                return;
+            }
+
+            gameData.roomCode = roomCode;
+            gameData.isCreator = false;
+            gameData.playerNumber = 2;
+
+            room.player2 = { 
+                name: gameData.playerName, 
+                pilihan: null, 
+                confirmed: false
+            };
+            room.status = 'ready';
+            
+            room.chatMessages.push({
+                type: 'system',
+                message: `🎮 ${gameData.playerName} bergabung ke room!`,
+                timestamp: new Date().toISOString()
+            });
+
+            console.log('Saving joined room:', room);
+            
+            const success = await saveRoom(roomCode, room);
+            if (success) {
+                showSuccess('Berhasil join room ' + roomCode + '! 🎮');
+                enterGameRoom();
+                playSound();
+            } else {
+                showError('Gagal join room! Coba lagi.');
+            }
+        }
+
+        function copyRoomCode() {
+            const roomCode = gameData.roomCode;
+            navigator.clipboard.writeText(roomCode).then(function() {
+                showSuccess('Kode room disalin: ' + roomCode);
+            }).catch(function(err) {
+                // Fallback untuk browser lama
+                const tempInput = document.createElement('input');
+                tempInput.value = roomCode;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+                showSuccess('Kode room disalin: ' + roomCode);
+            });
+            playSound();
+        }
+
+        function enterGameRoom() {
+            showSection('sectionGame');
+            resetChoiceUI();
+            startRoomListener(gameData.roomCode, updateRoomDisplay);
+            
+            // Setup chat input
+            const chatInput = document.getElementById('chatInput');
+            chatInput.onkeypress = function(e) {
+                if (e.key === 'Enter') {
+                    sendChatMessage();
+                }
+            };
+            
+            // Load initial room state
+            loadRoomState();
+        }
+
+        async function loadRoomState() {
+            const room = await getRoom(gameData.roomCode);
+            if (room) {
+                updateRoomDisplay(room);
+            }
+        }
+
+        function resetChoiceUI() {
+            document.getElementById('pilihanSection').style.display = 'block';
+            document.getElementById('confirmationSection').style.display = 'none';
+            gameData.tempChoice = null;
+            
+            document.querySelectorAll('.btn-pilihan').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+        }
+
+        async function sendChatMessage() {
+            const chatInput = document.getElementById('chatInput');
+            const message = chatInput.value.trim();
+            
+            if (!message) return;
+            
+            const room = await getRoom(gameData.roomCode);
+            if (!room) return;
+            
+            room.chatMessages.push({
+                type: 'player',
+                player: gameData.playerName,
+                message: message,
+                timestamp: new Date().toISOString()
+            });
+            
+            await saveRoom(gameData.roomCode, room);
+            chatInput.value = '';
+            playSound();
+        }
+
+        function updateChatDisplay(room) {
+            if (!room || !room.chatMessages) return;
+            
+            const chatMessagesDiv = document.getElementById('chatMessages');
+            chatMessagesDiv.innerHTML = '';
+            
+            room.chatMessages.forEach(msg => {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `chat-message ${msg.type}`;
+                
+                if (msg.type === 'system') {
+                    messageDiv.innerHTML = `💬 ${msg.message}`;
+                } else {
+                    const isOwnMessage = msg.player === gameData.playerName;
+                    messageDiv.className = `chat-message ${isOwnMessage ? 'player' : 'opponent'}`;
+                    messageDiv.innerHTML = `<strong>${msg.player}:</strong> ${msg.message}`;
+                }
+                
+                chatMessagesDiv.appendChild(messageDiv);
+            });
+            
+            chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
+        }
+
+        // UPDATE ROOM DISPLAY - Real-time dari Supabase
+        function updateRoomDisplay(room) {
+            if (!room) {
+                showError('Room tidak ditemukan!');
+                leaveRoom();
+                return;
+            }
+            
+            console.log('Updating room display:', room);
+            
+            document.getElementById('displayRoomCode').innerHTML = `ROOM-${gameData.roomCode}<br><button class="copy-btn" onclick="copyRoomCode()">📋 Copy Kode Room</button>`;
+            document.getElementById('roomTaruhan').textContent = `Rp ${formatRupiah(room.taruhan)}`;
+            
+            updateChatDisplay(room);
+            
+            // Update room status
+            if (room.status === 'finished') {
+                document.getElementById('roomStatus').textContent = 'Permainan selesai!';
+            } else if (room.player1.confirmed && room.player2 && room.player2.confirmed) {
+                document.getElementById('roomStatus').textContent = 'Kedua player READY!';
+            } else {
+                document.getElementById('roomStatus').textContent = room.player2 ? 'Silakan pilih dan konfirmasi...' : 'Menunggu player...';
+            }
+            
+            document.getElementById('playerCount').textContent = room.player2 ? '2/2' : '1/2';
+
+            // Update player slots
+            document.getElementById('player1Name').textContent = room.player1.name;
+            
+            if (room.player1.confirmed) {
+                document.getElementById('player1Status').textContent = '✅ READY';
+                document.getElementById('player1Slot').className = 'player confirmed';
+            } else if (room.player1.pilihan) {
+                document.getElementById('player1Status').textContent = 'Memilih...';
+                document.getElementById('player1Slot').className = 'player choosed';
+            } else {
+                document.getElementById('player1Status').textContent = 'Belum memilih';
+                document.getElementById('player1Slot').className = 'player';
+            }
+
+            if (room.player2) {
+                document.getElementById('player2Name').textContent = room.player2.name;
+                
+                if (room.player2.confirmed) {
+                    document.getElementById('player2Status').textContent = '✅ READY';
+                    document.getElementById('player2Slot').className = 'player confirmed';
+                } else if (room.player2.pilihan) {
+                    document.getElementById('player2Status').textContent = 'Memilih...';
+                    document.getElementById('player2Slot').className = 'player choosed';
+                } else {
+                    document.getElementById('player2Status').textContent = 'Belum memilih';
+                    document.getElementById('player2Slot').className = 'player';
+                }
+            } else {
+                document.getElementById('player2Name').textContent = '-';
+                document.getElementById('player2Status').textContent = 'Menunggu...';
+                document.getElementById('player2Slot').className = 'player';
+            }
+
+            // Show/hide choice sections based on game state
+            const currentPlayer = room[`player${gameData.playerNumber}`];
+            if (currentPlayer && !currentPlayer.confirmed && room.status !== 'finished') {
+                document.getElementById('pilihanSection').style.display = 'block';
+                document.getElementById('confirmationSection').style.display = 'none';
+            } else {
+                document.getElementById('pilihanSection').style.display = 'none';
+                document.getElementById('confirmationSection').style.display = 'none';
+            }
+
+            // Show results if game finished
+            if (room.status === 'finished' && room.hasil) {
+                document.getElementById('hasilSection').style.display = 'block';
+                updateResultDisplay(room);
+            } else {
+                document.getElementById('hasilSection').style.display = 'none';
+            }
+        }
+
+        function selectChoice(pilihan) {
+            gameData.tempChoice = pilihan;
+            
+            document.querySelectorAll('.btn-pilihan').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            event.target.classList.add('selected');
+            
+            document.getElementById('pilihanSection').style.display = 'none';
+            document.getElementById('confirmationSection').style.display = 'block';
+            document.getElementById('selectedChoice').textContent = pilihan.toUpperCase();
+            
+            playSound();
+        }
+
+        async function confirmChoice() {
+            if (!gameData.tempChoice) {
+                showError('Pilih pilihan dulu!');
+                return;
+            }
+
+            const room = await getRoom(gameData.roomCode);
+            if (!room) {
+                showError('Room tidak ditemukan!');
+                return;
+            }
+
+            const playerKey = `player${gameData.playerNumber}`;
+            
+            room[playerKey].pilihan = gameData.tempChoice;
+            room[playerKey].confirmed = true;
+            
+            room.chatMessages.push({
+                type: 'system',
+                message: `✅ ${gameData.playerName} sudah memilih!`,
+                timestamp: new Date().toISOString()
+            });
+            
+            const success = await saveRoom(gameData.roomCode, room);
+            
+            if (success) {
+                showSuccess('Pilihan dikonfirmasi! ✅');
+                resetChoiceUI();
+                playSound();
+            } else {
+                showError('Gagal menyimpan pilihan! Coba lagi.');
+            }
+        }
+
+        function cancelChoice() {
+            resetChoiceUI();
+            showSuccess('Pilihan dibatalkan');
+            playSound();
+        }
+
+        async function calculateResult() {
+            const room = await getRoom(gameData.roomCode);
+            if (!room || !room.player1 || !room.player2) return;
+            
+            const p1 = room.player1.pilihan;
+            const p2 = room.player2.pilihan;
+            
+            if (!p1 || !p2) return;
+            
+            let hasil = '';
+            let pemenang = null;
+            let totalPot = room.taruhan * 2;
+            
+            let feeAdmin = calculateAdminFee(room.taruhan);
+            let hadiahBersih = totalPot - feeAdmin;
+
+            if (p1 === p2) {
+                hasil = 'SERI!';
+                pemenang = 'seri';
+            } else if (
+                (p1 === 'batu' && p2 === 'gunting') ||
+                (p1 === 'gunting' && p2 === 'kertas') ||
+                (p1 === 'kertas' && p2 === 'batu')
+            ) {
+                hasil = `${room.player1.name} MENANG! 🎉`;
+                pemenang = 1;
+            } else {
+                hasil = `${room.player2.name} MENANG! 🎉`;
+                pemenang = 2;
+            }
+
+            room.hasil = { 
+                pemenang, 
+                hasil,
+                p1Choice: p1,
+                p2Choice: p2,
+                totalPot: totalPot,
+                feeAdmin: feeAdmin,
+                hadiahBersih: hadiahBersih
+            };
+            room.status = 'finished';
+            
+            room.chatMessages.push({
+                type: 'system',
+                message: `🏆 ${hasil}`,
+                timestamp: new Date().toISOString()
+            });
+            
+            await saveRoom(gameData.roomCode, room);
+            
+            playSound();
+        }
+
+        function updateResultDisplay(room) {
+            if (!room.hasil) return;
+
+            const hasil = room.hasil;
+            
+            document.getElementById('hasilPertandingan').innerHTML = `
+                <p>${room.player1.name}: <strong>${hasil.p1Choice ? hasil.p1Choice.toUpperCase() : 'BELUM MEMILIH'}</strong></p>
+                <p>${room.player2.name}: <strong>${hasil.p2Choice ? hasil.p2Choice.toUpperCase() : 'BELUM MEMILIH'}</strong></p>
+            `;
+
+            const statusElement = document.getElementById('statusPemenang');
+            statusElement.textContent = hasil.hasil;
+            statusElement.className = hasil.pemenang === 'seri' ? 'seri' : 'menang';
+
+            let pembayaranHTML = '';
+            if (hasil.pemenang === 'seri') {
+                pembayaranHTML = `
+                    <p>💰 Total Taruhan: Rp ${formatRupiah(hasil.totalPot)}</p>
+                    <p>🏦 Fee Admin: Rp ${formatRupiah(hasil.feeAdmin)}</p>
+                    <p>🔙 Dana dikembalikan ke masing-masing player</p>
+                `;
+            } else {
+                const pemenangName = hasil.pemenang === 1 ? room.player1.name : room.player2.name;
+                pembayaranHTML = `
+                    <p>💰 Total Pot: Rp ${formatRupiah(hasil.totalPot)}</p>
+                    <p>🏦 Fee Admin: Rp ${formatRupiah(hasil.feeAdmin)}</p>
+                    <p>🎁 Hadiah Bersih: Rp ${formatRupiah(hasil.hadiahBersih)}</p>
+                    <p>👑 ${pemenangName} mendapatkan: Rp ${formatRupiah(hasil.hadiahBersih)}</p>
+                `;
+            }
+            
+            document.getElementById('pembayaranInfo').innerHTML = pembayaranHTML;
+            document.getElementById('hasilSection').style.display = 'block';
+        }
+
+        async function rematch() {
+            const room = await getRoom(gameData.roomCode);
+            room.player1.pilihan = null;
+            room.player1.confirmed = false;
+            room.player2.pilihan = null;
+            room.player2.confirmed = false;
+            room.status = 'ready';
+            room.hasil = null;
+            room.showChoices = false;
+            
+            room.chatMessages.push({
+                type: 'system',
+                message: '🔄 Memulai permainan baru!',
+                timestamp: new Date().toISOString()
+            });
+            
+            document.getElementById('hasilSection').style.display = 'none';
+            await saveRoom(gameData.roomCode, room);
+            resetChoiceUI();
+            playSound();
+        }
+
+        async function leaveRoom() {
+            stopRoomListener();
+            
+            const room = await getRoom(gameData.roomCode);
+            if (room) {
+                room.chatMessages.push({
+                    type: 'system',
+                    message: `🚪 ${gameData.playerName} meninggalkan room`,
+                    timestamp: new Date().toISOString()
+                });
+                
+                if (gameData.isCreator) {
+                    await deleteRoom(gameData.roomCode);
+                } else {
+                    room.player2 = null;
+                    room.status = 'waiting';
+                    room.showChoices = false;
+                    await saveRoom(gameData.roomCode, room);
+                }
+            }
+            
+            showSection('sectionLobby');
+            updateRoomStats();
+            playSound();
+        }
+
+        function formatRupiah(angka) {
+            return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default player name
+            document.getElementById('playerName').value = gameData.playerName;
+            updateRoomStats();
+            
+            console.log('Game initialized with Supabase');
+        });
+    </script>
+</body>
+</html>

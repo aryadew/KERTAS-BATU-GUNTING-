@@ -1,0 +1,2697 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kertas Batu Gunting - Galaxy Theme</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a0e2a 0%, #1a1f4b 30%, #2d1b69 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Efek bintang */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+                radial-gradient(2px 2px at 40px 70px, #fff, transparent),
+                radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+                radial-gradient(1px 1px at 130px 80px, #fff, transparent),
+                radial-gradient(2px 2px at 160px 30px, #eee, transparent),
+                radial-gradient(1px 1px at 200px 70px, #fff, transparent),
+                radial-gradient(1px 1px at 240px 20px, #fff, transparent),
+                radial-gradient(1px 1px at 280px 60px, #fff, transparent),
+                radial-gradient(2px 2px at 320px 40px, #eee, transparent),
+                radial-gradient(1px 1px at 360px 90px, #fff, transparent);
+            background-repeat: repeat;
+            background-size: 400px 400px;
+            z-index: -1;
+            animation: twinkle 8s infinite linear;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(15, 22, 39, 0.85);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(100, 80, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #8A2BE2, #00FFFF, #FF00FF, #8A2BE2);
+            border-radius: 15px 15px 0 0;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 10px;
+            font-size: 2.2rem;
+            text-shadow: 0 0 10px rgba(138, 43, 226, 0.7);
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, #8A2BE2, #00FFFF, #FF00FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #a0a0ff;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        
+        .section {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(30, 35, 60, 0.7);
+            border-radius: 10px;
+            display: none;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #a0a0ff;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid rgba(138, 43, 226, 0.3);
+            border-radius: 8px;
+            font-size: 16px;
+            background: rgba(20, 25, 45, 0.8);
+            color: #fff;
+            transition: all 0.3s;
+        }
+        
+        input:focus, select:focus {
+            border-color: #8A2BE2;
+            box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+            outline: none;
+        }
+        
+        input[type="number"] {
+            text-align: right;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+        
+        .btn {
+            padding: 15px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin: 5px 0;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover::after {
+            left: 100%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #8A2BE2, #4B0082);
+            color: white;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #7a1fc9, #3d00b8);
+            box-shadow: 0 6px 20px rgba(138, 43, 226, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #00CED1, #1E90FF);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 206, 209, 0.4);
+        }
+        
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #00a8e0, #005fdb);
+            box-shadow: 0 6px 20px rgba(0, 206, 209, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, #FF00FF, #8A2BE2);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 0, 255, 0.4);
+        }
+        
+        .btn-warning:hover {
+            background: linear-gradient(135deg, #e6375f, #e63e1f);
+            box-shadow: 0 6px 20px rgba(255, 0, 255, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #FF1493, #8B008B);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.4);
+        }
+        
+        .btn-danger:hover {
+            background: linear-gradient(135deg, #e6375f, #e63e1f);
+            box-shadow: 0 6px 20px rgba(255, 20, 147, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        .btn-info {
+            background: linear-gradient(135deg, #00BFFF, #1E90FF);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 191, 255, 0.4);
+        }
+        
+        .btn-info:hover {
+            background: linear-gradient(135deg, #00a8e0, #005fdb);
+            box-shadow: 0 6px 20px rgba(0, 191, 255, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        .room-info {
+            background: rgba(30, 60, 50, 0.6);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 1px solid rgba(0, 255, 150, 0.3);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .player-list {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+            gap: 10px;
+        }
+        
+        .player {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            background: rgba(20, 25, 45, 0.8);
+            border-radius: 8px;
+            border: 2px dashed rgba(138, 43, 226, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .player.ready {
+            border: 2px solid #00FF88;
+            background: rgba(0, 255, 136, 0.1);
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+        }
+        
+        .player.choosed {
+            border: 2px solid #8A2BE2;
+            background: rgba(138, 43, 226, 0.1);
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
+        }
+        
+        .player.confirmed {
+            border: 2px solid #FFAA00;
+            background: rgba(255, 170, 0, 0.1);
+            box-shadow: 0 0 15px rgba(255, 170, 0, 0.3);
+        }
+        
+        .player h4 {
+            color: #a0a0ff;
+            margin-bottom: 5px;
+        }
+        
+        .game-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .pilihan-section {
+            display: none;
+        }
+        
+        .pilihan-buttons {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        .btn-pilihan {
+            flex: 1;
+            padding: 15px;
+            background: rgba(30, 35, 60, 0.8);
+            color: white;
+            border: 2px solid rgba(138, 43, 226, 0.3);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+        
+        .btn-pilihan:hover {
+            background: rgba(50, 55, 90, 0.8);
+            border-color: #8A2BE2;
+            transform: translateY(-3px);
+        }
+        
+        .btn-pilihan.selected {
+            background: rgba(138, 43, 226, 0.2);
+            border: 3px solid #8A2BE2;
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+        }
+        
+        .btn-pilihan:disabled {
+            background: rgba(60, 60, 80, 0.5);
+            cursor: not-allowed;
+            border-color: rgba(100, 100, 100, 0.3);
+        }
+        
+        .confirmation-section {
+            display: none;
+            text-align: center;
+            padding: 15px;
+            background: rgba(0, 50, 100, 0.5);
+            border-radius: 8px;
+            margin: 10px 0;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+        }
+        
+        .hasil-section {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            background: rgba(30, 35, 60, 0.8);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+        }
+        
+        .menang { 
+            color: #00FF88; 
+            font-weight: bold; 
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.7);
+        }
+        
+        .kalah { 
+            color: #FF1493; 
+            font-weight: bold; 
+            text-shadow: 0 0 10px rgba(255, 20, 147, 0.7);
+        }
+        
+        .seri { 
+            color: #FFAA00; 
+            font-weight: bold; 
+            text-shadow: 0 0 10px rgba(255, 170, 0, 0.7);
+        }
+        
+        .admin-fee {
+            background: rgba(255, 200, 0, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            text-align: center;
+            border: 1px solid rgba(255, 200, 0, 0.3);
+        }
+        
+        .room-code {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, #8A2BE2, #4B0082);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .copy-btn {
+            background: rgba(0, 191, 255, 0.8);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: rgba(0, 170, 230, 1);
+            transform: translateY(-2px);
+        }
+
+        .error-message {
+            background: rgba(255, 20, 147, 0.2);
+            color: #ff8fa3;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            text-align: center;
+            display: none;
+            border: 1px solid rgba(255, 20, 147, 0.5);
+        }
+
+        .success-message {
+            background: rgba(0, 255, 136, 0.2);
+            color: #88ffc6;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            text-align: center;
+            display: none;
+            border: 1px solid rgba(0, 255, 136, 0.5);
+        }
+
+        .choice-preview {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(255, 200, 0, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 200, 0, 0.3);
+        }
+
+        .room-stats {
+            background: rgba(30, 35, 60, 0.7);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+            border: 1px solid rgba(138, 43, 226, 0.2);
+        }
+
+        .stats-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #8A2BE2;
+            margin: 10px 0;
+            text-shadow: 0 0 10px rgba(138, 43, 226, 0.7);
+        }
+
+        .stats-label {
+            font-size: 14px;
+            color: #a0a0ff;
+        }
+
+        .join-info {
+            background: rgba(255, 200, 0, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            text-align: center;
+            font-size: 14px;
+            color: #ffcc00;
+            border: 1px solid rgba(255, 200, 0, 0.3);
+        }
+
+        .chat-section {
+            margin: 15px 0;
+            border: 2px solid rgba(138, 43, 226, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            background: rgba(20, 25, 45, 0.8);
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #8A2BE2, #4B0082);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .chat-messages {
+            height: 150px;
+            overflow-y: auto;
+            padding: 10px;
+            background: rgba(15, 20, 35, 0.8);
+            border-bottom: 1px solid rgba(138, 43, 226, 0.2);
+        }
+
+        .chat-message {
+            margin-bottom: 8px;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .chat-message.system {
+            background: rgba(255, 200, 0, 0.1);
+            text-align: center;
+            font-style: italic;
+            color: #ffcc00;
+            border-left: 3px solid #ffcc00;
+        }
+
+        .chat-message.player {
+            background: rgba(138, 43, 226, 0.1);
+            border-left: 3px solid #8A2BE2;
+        }
+
+        .chat-message.opponent {
+            background: rgba(0, 255, 136, 0.1);
+            border-left: 3px solid #00FF88;
+        }
+
+        .chat-input-container {
+            display: flex;
+            padding: 10px;
+            background: rgba(30, 35, 60, 0.8);
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            border-radius: 5px;
+            margin-right: 10px;
+            background: rgba(20, 25, 45, 0.8);
+            color: white;
+        }
+
+        .chat-send-btn {
+            background: linear-gradient(135deg, #8A2BE2, #4B0082);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .chat-send-btn:hover {
+            background: linear-gradient(135deg, #7a1fc9, #3d00b8);
+            transform: translateY(-2px);
+        }
+
+        .chat-send-btn:disabled {
+            background: rgba(60, 60, 80, 0.5);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .sound-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .sound-btn {
+            background: rgba(15, 22, 39, 0.8);
+            border: 2px solid rgba(138, 43, 226, 0.5);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+            color: white;
+        }
+
+        .sound-btn:hover {
+            background: rgba(30, 35, 60, 0.9);
+            transform: scale(1.1);
+            border-color: #8A2BE2;
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+        }
+
+        .sound-btn.muted {
+            background: rgba(255, 20, 147, 0.8);
+            border-color: rgba(255, 20, 147, 0.7);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 10px;
+            color: #a0a0ff;
+        }
+
+        .debug-info {
+            background: rgba(30, 35, 60, 0.7);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 12px;
+            color: #a0a0ff;
+            display: none;
+        }
+
+        .game-mode-selector {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .mode-option {
+            flex: 1;
+            padding: 12px;
+            background: rgba(30, 35, 60, 0.8);
+            border: 2px solid rgba(138, 43, 226, 0.3);
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .mode-option:hover {
+            background: rgba(50, 55, 90, 0.8);
+            border-color: #8A2BE2;
+        }
+
+        .mode-option.selected {
+            background: rgba(138, 43, 226, 0.2);
+            border: 2px solid #8A2BE2;
+            box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+        }
+
+        .mode-option h4 {
+            color: #a0a0ff;
+            margin-bottom: 5px;
+        }
+
+        .mode-option .price {
+            font-size: 12px;
+            color: #00FF88;
+        }
+
+        .score-display {
+            background: rgba(0, 50, 100, 0.5);
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            text-align: center;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+        }
+
+        .score-title {
+            font-size: 14px;
+            color: #a0a0ff;
+            margin-bottom: 5px;
+        }
+
+        .score-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #8A2BE2;
+        }
+
+        .round-info {
+            background: rgba(255, 200, 0, 0.1);
+            padding: 8px;
+            border-radius: 5px;
+            margin: 5px 0;
+            text-align: center;
+            font-size: 14px;
+            color: #ffcc00;
+            border: 1px solid rgba(255, 200, 0, 0.3);
+        }
+
+        /* Victory & Defeat Overlay */
+        .victory-overlay, .defeat-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .victory-content, .defeat-content {
+            text-align: center;
+            padding: 50px;
+            border-radius: 20px;
+            border: 4px solid;
+            box-shadow: 0 0 60px rgba(255, 255, 255, 0.4);
+            animation: pulse 2s infinite, slideIn 0.8s ease;
+            max-width: 80%;
+        }
+
+        .victory-content {
+            background: linear-gradient(135deg, #8A2BE2, #4B0082);
+            border-color: #8A2BE2;
+            box-shadow: 0 0 60px rgba(138, 43, 226, 0.6);
+        }
+
+        .defeat-content {
+            background: linear-gradient(135deg, #FF1493, #8B008B);
+            border-color: #FF1493;
+            box-shadow: 0 0 60px rgba(255, 20, 147, 0.6);
+        }
+
+        .victory-title, .defeat-title {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            animation: bounce 1s ease infinite;
+        }
+
+        .victory-title {
+            color: #FFFFFF;
+            text-shadow: 0 0 20px rgba(138, 43, 226, 0.8);
+        }
+
+        .defeat-title {
+            color: #FFFFFF;
+            text-shadow: 0 0 20px rgba(255, 20, 147, 0.8);
+        }
+
+        .victory-subtitle, .defeat-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #FFFFFF;
+        }
+
+        .tap-to-continue {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-style: italic;
+            margin-top: 20px;
+            animation: blink 2s infinite;
+        }
+
+        /* Team-specific styles */
+        .team-mode-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .team-option {
+            flex: 1;
+            min-width: 100px;
+            padding: 10px;
+            background: rgba(30, 35, 60, 0.8);
+            border: 2px solid rgba(138, 43, 226, 0.3);
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .team-option:hover {
+            background: rgba(50, 55, 90, 0.8);
+            border-color: #8A2BE2;
+        }
+
+        .team-option.selected {
+            background: rgba(138, 43, 226, 0.2);
+            border: 2px solid #8A2BE2;
+            box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+        }
+
+        .team-option h4 {
+            color: #a0a0ff;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .team-display {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+            gap: 10px;
+        }
+
+        .team {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(20, 25, 45, 0.8);
+            border: 2px solid;
+        }
+
+        .team-a {
+            border-color: #8A2BE2;
+        }
+
+        .team-b {
+            border-color: #00CED1;
+        }
+
+        .team-title {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .team-a .team-title {
+            background: rgba(138, 43, 226, 0.2);
+            color: #8A2BE2;
+        }
+
+        .team-b .team-title {
+            background: rgba(0, 206, 209, 0.2);
+            color: #00CED1;
+        }
+
+        .team-player {
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 5px;
+            background: rgba(30, 35, 60, 0.6);
+            border: 1px solid rgba(138, 43, 226, 0.2);
+        }
+
+        .team-player.ready {
+            border: 1px solid #00FF88;
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        .team-player.choosed {
+            border: 1px solid #8A2BE2;
+            background: rgba(138, 43, 226, 0.1);
+        }
+
+        .team-player.confirmed {
+            border: 1px solid #FFAA00;
+            background: rgba(255, 170, 0, 0.1);
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes slideIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(-50px) scale(0.8); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1); 
+            }
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(20, 25, 45, 0.8);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(138, 43, 226, 0.5);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(138, 43, 226, 0.7);
+        }
+
+        /* Team selection styles */
+        .team-selection-buttons .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .team-selection-buttons .btn:disabled:hover {
+            transform: none !important;
+        }
+        
+        .team-info {
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            color: #8A2BE2;
+        }
+
+        /* Nebula effect */
+        .nebula {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.6;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(138, 43, 226, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 0, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(0, 206, 209, 0.2) 0%, transparent 50%);
+        }
+    </style>
+    
+    <!-- SUPABASE SDK -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <!-- Nebula Background -->
+    <div class="nebula"></div>
+
+    <!-- Victory Overlay -->
+    <div class="victory-overlay" id="victoryOverlay" onclick="hideOverlay()">
+        <div class="victory-content">
+            <div class="victory-title">VICTORY</div>
+            <div class="victory-subtitle">You are the Champion! 🏆</div>
+            <div class="tap-to-continue">Tap to Continue</div>
+        </div>
+    </div>
+
+    <!-- Defeat Overlay -->
+    <div class="defeat-overlay" id="defeatOverlay" onclick="hideOverlay()">
+        <div class="defeat-content">
+            <div class="defeat-title">DEFEAT</div>
+            <div class="defeat-subtitle">Better luck next time! 💪</div>
+            <div class="tap-to-continue">Tap to Continue</div>
+        </div>
+    </div>
+
+    <div class="sound-controls">
+        <button class="sound-btn" id="soundToggle" onclick="toggleSound()">🔊</button>
+    </div>
+
+    <div class="container">
+        <h1>🎮 KERTAS BATU GUNTING</h1>
+        <div class="subtitle">PEMBUATAN WEB BY CILL</div>
+        
+        <div class="error-message" id="errorMessage"></div>
+        <div class="success-message" id="successMessage"></div>
+        
+        <!-- Debug info untuk troubleshooting -->
+        <div class="debug-info" id="debugInfo"></div>
+        
+        <!-- Section 1: Create or Join Room -->
+        <div class="section active" id="sectionLobby">
+            <div class="input-group">
+                <label>Nama Player:</label>
+                <input type="text" id="playerName" placeholder="Masukkan nama kamu">
+            </div>
+            
+            <button class="btn btn-primary" onclick="showCreateRoom()">➕ BUAT ROOM</button>
+            <button class="btn btn-secondary" onclick="showJoinRoom()">🔗 JOIN ROOM</button>
+
+            <div class="room-stats">
+                <h4>📊 STATUS KONEKSI</h4>
+                <div class="stats-number" id="connectionStatus">Mengecek...</div>
+                <div class="stats-label" id="connectionDetails">Koneksi ke Supabase</div>
+                
+                <div class="join-info">
+                    💡 <strong>Cara Main:</strong><br>
+                    1. Buat room baru ATAU join dengan kode room<br>
+                    2. Share kode room ke teman untuk bermain
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 2: Create Room -->
+        <div class="section" id="sectionCreate">
+            <h3>Buat Room Baru</h3>
+            <div class="input-group">
+                <label>Taruhan:</label>
+                <input type="text" id="createTaruhan" placeholder="Contoh: 10.000" value="5.000" oninput="formatRupiahInput(this)">
+            </div>
+            
+            <div class="input-group">
+                <label>Pilih Mode Permainan:</label>
+                <div class="game-mode-selector">
+                    <div class="mode-option selected" onclick="selectGameMode('single')">
+                        <h4>🎯 SINGLE ROUND</h4>
+                        <p>1 Ronde Penentu</p>
+                        <p class="price">Taruhan Normal</p>
+                    </div>
+                    <div class="mode-option" onclick="selectGameMode('bo3')">
+                        <h4>⚔️ MPL</h4>
+                        <p>Pemenang 2/3 Ronde</p>
+                        <p class="price">Taruhan Normal</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Mode Tim:</label>
+                <div class="team-mode-selector">
+                    <div class="team-option selected" onclick="selectTeamMode('1v1')">
+                        <h4>👤 1 vs 1</h4>
+                        <p>Duel Classic</p>
+                    </div>
+                    <div class="team-option" onclick="selectTeamMode('2v2')">
+                        <h4>👥 2 vs 2</h4>
+                        <p>Team Battle</p>
+                    </div>
+                    <div class="team-option" onclick="selectTeamMode('3v3')">
+                        <h4>👥👥 3 vs 3</h4>
+                        <p>Squad Match</p>
+                    </div>
+                    <div class="team-option" onclick="selectTeamMode('4v4')">
+                        <h4>👥👥👥 4 vs 4</h4>
+                        <p>Full Team</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label>Room Password (optional):</label>
+                <input type="text" id="roomPassword" placeholder="Password room (bisa dikosongkan)">
+            </div>
+            <button class="btn btn-primary" onclick="createRoom()">🎯 BUAT ROOM</button>
+            <button class="btn btn-secondary" onclick="backToLobby()">⬅ KEMBALI</button>
+        </div>
+        
+        <!-- Section 3: Join Room -->
+        <div class="section" id="sectionJoin">
+            <h3>Join Room</h3>
+            
+            <div class="join-info">
+                💡 <strong>Minta kode room</strong> dari teman yang sudah buat room
+            </div>
+            
+            <div class="input-group">
+                <label>Kode Room:</label>
+                <input type="text" id="joinRoomCode" placeholder="Masukkan kode room dari teman" style="text-transform: uppercase;">
+            </div>
+            <div class="input-group">
+                <label>Password Room (jika ada):</label>
+                <input type="text" id="joinPassword" placeholder="Masukkan password room">
+            </div>
+            
+            <!-- TAMBAHAN: Pilihan Team -->
+            <div class="input-group" id="teamSelection" style="display: none;">
+                <label>Pilih Team:</label>
+                <div class="team-selection-buttons" style="display: flex; gap: 10px; margin-top: 10px;">
+                    <button class="btn btn-primary" onclick="selectJoinTeam('A')" id="teamAButton" style="flex: 1;">👥 TEAM A</button>
+                    <button class="btn btn-secondary" onclick="selectJoinTeam('B')" id="teamBButton" style="flex: 1;">👥 TEAM B</button>
+                </div>
+                <div class="team-info" id="teamInfo" style="margin-top: 10px; padding: 10px; background: rgba(30,35,60,0.7); border-radius: 8px; text-align: center; display: none;">
+                    <span id="selectedTeamText"></span>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary" onclick="checkRoom()" id="checkRoomBtn">🔍 CEK ROOM</button>
+            <button class="btn btn-primary" onclick="joinRoom()" id="joinRoomBtn" style="display: none;">🎮 JOIN ROOM</button>
+            <button class="btn btn-secondary" onclick="backToLobby()">⬅ KEMBALI</button>
+        </div>
+        
+        <!-- Section 4: Game Room -->
+        <div class="section" id="sectionGame">
+            <div class="room-code" id="displayRoomCode">
+                ROOM-XXXX
+                <br>
+                <button class="copy-btn" onclick="copyRoomCode()">📋 Copy Kode Room</button>
+            </div>
+            
+            <div class="room-info">
+                <p>Mode: <strong id="roomMode">Single Round</strong></p>
+                <p>Mode Tim: <strong id="roomTeamMode">1v1</strong></p>
+                <p>Taruhan: <strong id="roomTaruhan">Rp 0</strong></p>
+                <p>Status: <strong id="roomStatus">Menunggu player...</strong></p>
+                <p>Pemain: <span id="playerCount">1/2</span></p>
+            </div>
+
+            <!-- Score Display -->
+            <div class="score-display" id="scoreDisplay" style="display: none;">
+                <div class="score-title">SCORE SEMENTARA</div>
+                <div class="score-value" id="scoreValue">0 - 0</div>
+                <div class="round-info" id="roundInfo">Ronde 1</div>
+            </div>
+            
+            <!-- Chat Room -->
+            <div class="chat-section" id="chatSection">
+                <div class="chat-header">💬 Chat Room</div>
+                <div class="chat-messages" id="chatMessages">
+                    <div class="chat-message system">
+                        💡 Selamat datang di chat room! Gunakan untuk berkomunikasi dengan lawan.
+                    </div>
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" class="chat-input" id="chatInput" placeholder="Ketik pesan..." maxlength="100">
+                    <button class="chat-send-btn" id="chatSendBtn" onclick="sendChatMessage()">Kirim</button>
+                </div>
+            </div>
+            
+            <!-- Player/Team Display -->
+            <div id="teamDisplay" style="display: none;">
+                <div class="team-display">
+                    <div class="team team-a">
+                        <div class="team-title">TEAM A</div>
+                        <div id="teamAPlayers"></div>
+                    </div>
+                    <div class="team team-b">
+                        <div class="team-title">TEAM B</div>
+                        <div id="teamBPlayers"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="playerDisplay">
+                <div class="player-list">
+                    <div class="player" id="player1Slot">
+                        <h4>Player 1</h4>
+                        <div id="player1Name">-</div>
+                        <div id="player1Status">Menunggu...</div>
+                    </div>
+                    <div class="player" id="player2Slot">
+                        <h4>Player 2</h4>
+                        <div id="player2Name">-</div>
+                        <div id="player2Status">Menunggu...</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="game-controls" id="gameControls">
+                <!-- Pilihan Section -->
+                <div class="pilihan-section" id="pilihanSection">
+                    <h4>Pilih Salah Satu:</h4>
+                    <div class="pilihan-buttons">
+                        <button class="btn-pilihan" onclick="selectChoice('kertas')">📄 Kertas</button>
+                        <button class="btn-pilihan" onclick="selectChoice('batu')">🪨 Batu</button>
+                        <button class="btn-pilihan" onclick="selectChoice('gunting')">✂️ Gunting</button>
+                    </div>
+                </div>
+                
+                <!-- Confirmation Section -->
+                <div class="confirmation-section" id="confirmationSection">
+                    <div class="choice-preview" id="choicePreview">
+                        Anda memilih: <span id="selectedChoice">-</span>
+                    </div>
+                    <p>Yakin dengan pilihan ini?</p>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn btn-warning" onclick="confirmChoice()">✅ YA, READY!</button>
+                        <button class="btn btn-secondary" onclick="cancelChoice()">❌ BATAL</button>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn btn-danger" onclick="leaveRoom()">🚪 KELUAR ROOM</button>
+            
+            <div class="hasil-section" id="hasilSection" style="display: none;">
+                <h3>🏆 HASIL PERMAINAN</h3>
+                <div id="hasilPertandingan"></div>
+                <div id="statusPemenang"></div>
+                <div class="admin-fee" id="pembayaranInfo"></div>
+                <button class="btn btn-primary" onclick="rematch()">🔄 MAIN LAGI</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==================== SUPABASE CONFIG ====================
+        const SUPABASE_URL = 'https://dmxcnbsxgrjjvprkmuar.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRteGNuYnN4Z3JqanZwcmttdWFyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAwMzE1NDUsImV4cCI6MjA3NTYwNzU0NX0.LQAfUnB7tMGPvDyNzu2hBYZ7RVl5Glvu_OaIekJ-LeE';
+        
+        // Inisialisasi Supabase dengan cara yang benar
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // ==================== GAME DATA ====================
+        let gameData = {
+            playerName: '',
+            roomCode: '',
+            isCreator: false,
+            playerNumber: 0,
+            tempChoice: null,
+            soundEnabled: true,
+            roomSubscription: null,
+            gameMode: 'single', // single, bo3
+            teamMode: '1v1', // 1v1, 2v2, 3v3, 4v4
+            teamSize: 1
+        };
+
+        // Variabel baru untuk pilihan team
+        let selectedTeam = null;
+        let roomInfo = null;
+
+        // ==================== VICTORY & DEFEAT FUNCTIONS ====================
+        function showVictory() {
+            if (!gameData.soundEnabled) return;
+            
+            // Play victory sound
+            playVictorySound();
+            
+            // Show victory overlay
+            const victoryOverlay = document.getElementById('victoryOverlay');
+            victoryOverlay.style.display = 'flex';
+            
+            console.log('🎉 VICTORY!');
+        }
+
+        function showDefeat() {
+            if (!gameData.soundEnabled) return;
+            
+            // Play defeat sound
+            playDefeatSound();
+            
+            // Show defeat overlay
+            const defeatOverlay = document.getElementById('defeatOverlay');
+            defeatOverlay.style.display = 'flex';
+            
+            console.log('💔 DEFEAT!');
+        }
+
+        function hideOverlay() {
+            document.getElementById('victoryOverlay').style.display = 'none';
+            document.getElementById('defeatOverlay').style.display = 'none';
+        }
+
+        function playVictorySound() {
+            if (!gameData.soundEnabled) return;
+            
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                
+                // Create multiple oscillators for a more complex victory sound
+                const oscillators = [];
+                const frequencies = [523.25, 659.25, 783.99, 1046.50]; // C, E, G, C (high)
+                
+                frequencies.forEach((freq, index) => {
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    oscillator.frequency.value = freq;
+                    oscillator.type = 'sine';
+                    
+                    // Stagger the start times for a chord effect
+                    const startTime = audioContext.currentTime + (index * 0.1);
+                    const endTime = startTime + 0.5;
+                    
+                    gainNode.gain.setValueAtTime(0, startTime);
+                    gainNode.gain.linearRampToValueAtTime(0.2, startTime + 0.05);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, endTime);
+                    
+                    oscillator.start(startTime);
+                    oscillator.stop(endTime);
+                    
+                    oscillators.push(oscillator);
+                });
+                
+            } catch (e) {
+                console.log('Victory sound not supported');
+            }
+        }
+
+        function playDefeatSound() {
+            if (!gameData.soundEnabled) return;
+            
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                // Falling frequency for defeat sound
+                oscillator.frequency.setValueAtTime(392.00, audioContext.currentTime); // G
+                oscillator.frequency.exponentialRampToValueAtTime(130.81, audioContext.currentTime + 0.8); // C (low)
+                
+                oscillator.type = 'sawtooth';
+                
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 1);
+                
+            } catch (e) {
+                console.log('Defeat sound not supported');
+            }
+        }
+
+        // ==================== TEAM MODE FUNCTIONS ====================
+        function selectTeamMode(mode) {
+            gameData.teamMode = mode;
+            gameData.teamSize = parseInt(mode[0]); // Extract number from '2v2'
+            
+            document.querySelectorAll('.team-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+            
+            playSound();
+        }
+
+        function getTeamSize() {
+            switch(gameData.teamMode) {
+                case '1v1': return 1;
+                case '2v2': return 2;
+                case '3v3': return 3;
+                case '4v4': return 4;
+                default: return 1;
+            }
+        }
+
+        // ==================== AUTO CLEANUP FUNCTIONS ====================
+        async function cleanupOldRooms() {
+            try {
+                console.log('🔄 Running auto-cleanup...');
+                const rooms = await getAllRooms();
+                const now = new Date();
+                let deletedCount = 0;
+
+                for (const [roomCode, roomData] of Object.entries(rooms)) {
+                    // Skip if room doesn't have createdAt
+                    if (!roomData.createdAt) continue;
+                    
+                    const roomAge = now - new Date(roomData.createdAt);
+                    const ageInHours = roomAge / (1000 * 60 * 60);
+                    
+                    // Delete rooms older than 24 hours
+                    if (ageInHours > 24) {
+                        await deleteRoom(roomCode);
+                        deletedCount++;
+                        console.log(`🧹 Deleted old room: ${roomCode} (${ageInHours.toFixed(1)} hours old)`);
+                    }
+                }
+                
+                if (deletedCount > 0) {
+                    console.log(`✅ Cleanup completed: ${deletedCount} rooms deleted`);
+                }
+            } catch (error) {
+                console.error('❌ Cleanup error:', error);
+            }
+        }
+
+        // Cleanup room setelah game selesai
+        async function cleanupFinishedRoom(roomCode) {
+            setTimeout(async () => {
+                await deleteRoom(roomCode);
+                console.log(`🧹 Auto-deleted finished room: ${roomCode}`);
+            }, 5 * 60 * 1000); // 5 menit setelah game selesai
+        }
+
+        // ==================== SUPABASE FUNCTIONS ====================
+        async function getRoom(roomCode) {
+            try {
+                console.log('Getting room:', roomCode);
+                updateDebugInfo(`Mencari room: ${roomCode}`);
+                
+                const { data, error } = await supabase
+                    .from('rooms')
+                    .select('*')
+                    .eq('code', roomCode)
+                    .single();
+                    
+                if (error) {
+                    console.log('Room not found:', roomCode, error);
+                    updateDebugInfo(`Room ${roomCode} tidak ditemukan: ${error.message}`);
+                    return null;
+                }
+                
+                if (data && data.data) {
+                    console.log('Room found:', data.data);
+                    // Tambahkan code ke data room untuk konsistensi
+                    data.data.code = roomCode;
+                    return data.data;
+                }
+                
+                return null;
+            } catch (error) {
+                console.error('Error getting room:', error);
+                updateDebugInfo(`Error get room: ${error.message}`);
+                return null;
+            }
+        }
+
+        async function saveRoom(roomCode, roomData) {
+            try {
+                // Debug info
+                updateDebugInfo(`Menyimpan room: ${roomCode}`);
+                
+                const { data, error } = await supabase
+                    .from('rooms')
+                    .upsert({
+                        code: roomCode,
+                        data: roomData,
+                        updated_at: new Date().toISOString()
+                    }, {
+                        onConflict: 'code'
+                    });
+                    
+                if (error) {
+                    console.error('Supabase save error:', error);
+                    updateDebugInfo(`Error: ${error.message}`);
+                    return false;
+                }
+                console.log('Room saved successfully:', roomCode);
+                updateDebugInfo(`Room ${roomCode} berhasil disimpan`);
+                return true;
+            } catch (error) {
+                console.error('Error saving room:', error);
+                updateDebugInfo(`Exception: ${error.message}`);
+                return false;
+            }
+        }
+
+        async function deleteRoom(roomCode) {
+            try {
+                const { error } = await supabase
+                    .from('rooms')
+                    .delete()
+                    .eq('code', roomCode);
+                    
+                return !error;
+            } catch (error) {
+                console.error('Error deleting room:', error);
+                return false;
+            }
+        }
+
+        async function getAllRooms() {
+            try {
+                const { data, error } = await supabase
+                    .from('rooms')
+                    .select('code, data');
+                    
+                if (error) {
+                    console.error('Error getting rooms:', error);
+                    return {};
+                }
+                
+                const roomsMap = {};
+                if (data) {
+                    data.forEach(room => {
+                        roomsMap[room.code] = room.data;
+                    });
+                }
+                return roomsMap;
+            } catch (error) {
+                console.error('Error getting all rooms:', error);
+                return {};
+            }
+        }
+
+        function startRoomListener(roomCode, callback) {
+            console.log('Starting realtime listener for:', roomCode);
+            
+            // Unsubscribe existing listener if any
+            if (gameData.roomSubscription) {
+                gameData.roomSubscription.unsubscribe();
+            }
+
+            const subscription = supabase
+                .channel('room-changes')
+                .on('postgres_changes', 
+                    {
+                        event: '*',
+                        schema: 'public',
+                        table: 'rooms',
+                        filter: `code=eq.${roomCode}`
+                    },
+                    (payload) => {
+                        console.log('Realtime update:', payload);
+                        if (payload.new && payload.new.data) {
+                            callback(payload.new.data);
+                        }
+                    }
+                )
+                .subscribe((status) => {
+                    console.log('Subscription status:', status);
+                });
+
+            gameData.roomSubscription = subscription;
+            return subscription;
+        }
+
+        function stopRoomListener() {
+            if (gameData.roomSubscription) {
+                gameData.roomSubscription.unsubscribe();
+                gameData.roomSubscription = null;
+                console.log('Room listener stopped');
+            }
+        }
+
+        // ==================== GAME FUNCTIONS ====================
+        function selectGameMode(mode) {
+            gameData.gameMode = mode;
+            
+            // Update UI
+            document.querySelectorAll('.mode-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+            
+            playSound();
+        }
+
+        function calculateAdminFee(taruhan) {
+            if (taruhan >= 1 && taruhan <= 9500) return 1000;
+            if (taruhan >= 10000 && taruhan <= 19900) return 2000;
+            if (taruhan >= 20000 && taruhan <= 29900) return 3000;
+            if (taruhan >= 30000 && taruhan <= 39900) return 4000;
+            if (taruhan >= 40000 && taruhan <= 49900) return 5000;
+            if (taruhan >= 50000 && taruhan <= 59900) return 6000;
+            if (taruhan >= 60000 && taruhan <= 69900) return 7000;
+            if (taruhan >= 70000 && taruhan <= 79900) return 8000;
+            if (taruhan >= 80000 && taruhan <= 89900) return 9000;
+            if (taruhan >= 90000 && taruhan <= 99900) return 10000;
+            if (taruhan >= 100000) return Math.floor(taruhan / 10000) * 1000;
+            return 1000;
+        }
+
+        function playSound() {
+            if (!gameData.soundEnabled) return;
+            // Simple sound implementation
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = 800;
+                oscillator.type = 'sine';
+                
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.1);
+            } catch (e) {
+                console.log('Sound not supported');
+            }
+        }
+
+        function toggleSound() {
+            gameData.soundEnabled = !gameData.soundEnabled;
+            const soundBtn = document.getElementById('soundToggle');
+            soundBtn.textContent = gameData.soundEnabled ? '🔊' : '🔇';
+            soundBtn.classList.toggle('muted', !gameData.soundEnabled);
+            showSuccess(gameData.soundEnabled ? 'Sound diaktifkan' : 'Sound dimatikan');
+            playSound();
+        }
+
+        function formatRupiahInput(input) {
+            let value = input.value.replace(/[^\d]/g, '');
+            if (value) {
+                value = parseInt(value).toLocaleString('id-ID');
+                input.value = value;
+            }
+        }
+
+        function parseRupiahInput(inputValue) {
+            return parseInt(inputValue.replace(/[^\d]/g, '') || 0);
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+            playSound();
+        }
+
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMessage');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 3000);
+        }
+
+        function updateDebugInfo(message) {
+            const debugDiv = document.getElementById('debugInfo');
+            debugDiv.innerHTML = `<strong>Debug:</strong> ${message}`;
+            debugDiv.style.display = 'block';
+        }
+
+        function generateRoomCode() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            let result = '';
+            for (let i = 0; i < 4; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        function showCreateRoom() {
+            const playerName = document.getElementById('playerName').value.trim();
+            if (!playerName) {
+                showError('Masukkan nama dulu!');
+                document.getElementById('playerName').focus();
+                return;
+            }
+            gameData.playerName = playerName;
+            showSection('sectionCreate');
+            playSound();
+        }
+
+        function showJoinRoom() {
+            const playerName = document.getElementById('playerName').value.trim();
+            if (!playerName) {
+                showError('Masukkan nama dulu!');
+                document.getElementById('playerName').focus();
+                return;
+            }
+            gameData.playerName = playerName;
+            updateRoomStats();
+            showSection('sectionJoin');
+            playSound();
+        }
+
+        function backToLobby() {
+            // Reset state pilihan team
+            roomInfo = null;
+            selectedTeam = null;
+            
+            // Reset UI
+            document.getElementById('teamSelection').style.display = 'none';
+            document.getElementById('checkRoomBtn').style.display = 'block';
+            document.getElementById('joinRoomBtn').style.display = 'none';
+            document.getElementById('teamInfo').style.display = 'none';
+            
+            showSection('sectionLobby');
+            updateRoomStats();
+            playSound();
+        }
+
+        async function updateRoomStats() {
+            try {
+                const rooms = await getAllRooms();
+                const activeRooms = Object.entries(rooms).filter(([code, room]) => {
+                    return room && room.status === 'waiting';
+                });
+                
+                document.getElementById('connectionStatus').textContent = `${activeRooms.length} Room Aktif`;
+            } catch (error) {
+                console.error('Error updating room stats:', error);
+            }
+        }
+
+        // Fungsi untuk mengecek room sebelum join
+        async function checkRoom() {
+            const roomCodeInput = document.getElementById('joinRoomCode');
+            const roomCode = roomCodeInput.value.toUpperCase().trim();
+            
+            if (!roomCode) {
+                showError('Masukkan kode room!');
+                roomCodeInput.focus();
+                return;
+            }
+
+            if (roomCode.length !== 4) {
+                showError('Kode room harus 4 karakter!');
+                roomCodeInput.focus();
+                return;
+            }
+
+            console.log('Checking room:', roomCode);
+            updateDebugInfo(`Mengecek room: ${roomCode}`);
+            
+            const room = await getRoom(roomCode);
+            if (!room) {
+                showError('Room ' + roomCode + ' tidak ditemukan! Pastikan kode room benar.');
+                return;
+            }
+
+            // Simpan info room untuk digunakan nanti
+            roomInfo = room;
+            
+            // Tampilkan pilihan team
+            document.getElementById('teamSelection').style.display = 'block';
+            document.getElementById('checkRoomBtn').style.display = 'none';
+            document.getElementById('joinRoomBtn').style.display = 'block';
+            
+            // Reset pilihan team
+            selectedTeam = null;
+            document.getElementById('teamInfo').style.display = 'none';
+            
+            // Update info slot team
+            updateTeamSlotInfo(room);
+            
+            showSuccess('Room ditemukan! Silakan pilih team.');
+            playSound();
+        }
+
+        // Fungsi untuk memilih team saat join
+        function selectJoinTeam(team) {
+            if (!roomInfo) {
+                showError('Silakan cek room terlebih dahulu!');
+                return;
+            }
+            
+            selectedTeam = team;
+            
+            // Update UI
+            document.querySelectorAll('.team-selection-buttons .btn').forEach(btn => {
+                btn.classList.remove('btn-primary', 'btn-secondary');
+                btn.classList.add('btn-secondary');
+            });
+            
+            if (team === 'A') {
+                document.getElementById('teamAButton').classList.remove('btn-secondary');
+                document.getElementById('teamAButton').classList.add('btn-primary');
+            } else {
+                document.getElementById('teamBButton').classList.remove('btn-secondary');
+                document.getElementById('teamBButton').classList.add('btn-primary');
+            }
+            
+            // Tampilkan info team yang dipilih
+            const teamInfoDiv = document.getElementById('teamInfo');
+            teamInfoDiv.style.display = 'block';
+            document.getElementById('selectedTeamText').textContent = `Anda memilih: TEAM ${team}`;
+            
+            playSound();
+        }
+
+        // Fungsi untuk update info slot team
+        function updateTeamSlotInfo(room) {
+            const teamSize = room.teamSize || 1;
+            const teamACount = room.teams.teamA.filter(p => p.name).length;
+            const teamBCount = room.teams.teamB.filter(p => p.name).length;
+            
+            document.getElementById('teamAButton').innerHTML = `👥 TEAM A (${teamACount}/${teamSize})`;
+            document.getElementById('teamBButton').innerHTML = `👥 TEAM B (${teamBCount}/${teamSize})`;
+            
+            // Nonaktifkan tombol jika team sudah penuh
+            document.getElementById('teamAButton').disabled = (teamACount >= teamSize);
+            document.getElementById('teamBButton').disabled = (teamBCount >= teamSize);
+            
+            if (teamACount >= teamSize && teamBCount >= teamSize) {
+                showError('Kedua team sudah penuh! Tidak bisa join room ini.');
+                document.getElementById('joinRoomBtn').disabled = true;
+            } else {
+                document.getElementById('joinRoomBtn').disabled = false;
+            }
+        }
+
+        // CREATE ROOM dengan Supabase - DIPERBAIKI
+        async function createRoom() {
+            const taruhanInput = document.getElementById('createTaruhan').value;
+            const password = document.getElementById('roomPassword').value;
+            
+            const taruhan = parseRupiahInput(taruhanInput);
+            if (!taruhan || taruhan <= 0) {
+                showError('Masukkan jumlah taruhan yang valid!');
+                return;
+            }
+
+            if (taruhan < 1000) {
+                showError('Taruhan minimal Rp 1.000!');
+                return;
+            }
+
+            const teamSize = getTeamSize();
+            const totalPlayers = teamSize * 2;
+
+            updateDebugInfo(`Membuat room: ${gameData.teamMode}, total pemain: ${totalPlayers}`);
+
+            let roomCode;
+            let attempts = 0;
+            let rooms = await getAllRooms();
+            
+            do {
+                roomCode = generateRoomCode();
+                attempts++;
+            } while (rooms[roomCode] && attempts < 10);
+
+            if (attempts >= 10) {
+                showError('Gagal membuat room, coba lagi!');
+                return;
+            }
+
+            gameData.roomCode = roomCode;
+            gameData.isCreator = true;
+            gameData.playerNumber = 1;
+
+            // Inisialisasi struktur data untuk team mode
+            const roomData = {
+                password: password,
+                taruhan: taruhan,
+                gameMode: gameData.gameMode,
+                teamMode: gameData.teamMode,
+                teamSize: teamSize,
+                teams: {
+                    teamA: [
+                        { 
+                            name: gameData.playerName, 
+                            pilihan: null, 
+                            confirmed: false,
+                            playerNumber: 1
+                        }
+                    ],
+                    teamB: []
+                },
+                status: 'waiting',
+                hasil: null,
+                scores: { teamA: 0, teamB: 0 },
+                currentRound: 1,
+                roundHistory: [],
+                createdAt: new Date().toISOString(),
+                showChoices: false,
+                showResult: false,
+                chatMessages: [{
+                    type: 'system',
+                    message: `🎮 ${gameData.playerName} membuat room ${gameData.teamMode}!`,
+                    timestamp: new Date().toISOString()
+                }]
+            };
+
+            // Tambahkan slot kosong untuk pemain lainnya berdasarkan team mode
+            for (let i = 2; i <= teamSize; i++) {
+                roomData.teams.teamA.push({
+                    name: null,
+                    pilihan: null,
+                    confirmed: false,
+                    playerNumber: i
+                });
+            }
+
+            for (let i = 1; i <= teamSize; i++) {
+                roomData.teams.teamB.push({
+                    name: null,
+                    pilihan: null,
+                    confirmed: false,
+                    playerNumber: i + teamSize
+                });
+            }
+
+            console.log('Creating team room:', roomCode, roomData);
+            
+            const success = await saveRoom(roomCode, roomData);
+            if (success) {
+                showSuccess(`Room ${roomCode} (${gameData.teamMode}) berhasil dibuat! 🎉`);
+                enterGameRoom();
+                playSound();
+            } else {
+                showError('Gagal membuat room! Coba lagi.');
+            }
+        }
+
+        function getModeDisplayName(mode) {
+            switch(mode) {
+                case 'single': return 'Single Round';
+                case 'bo3': return 'Best of 3';
+                default: return 'Single Round';
+            }
+        }
+
+        // JOIN ROOM dengan pilihan team - DIPERBAIKI
+        async function joinRoom() {
+            if (!selectedTeam) {
+                showError('Pilih team dulu!');
+                return;
+            }
+
+            const roomCodeInput = document.getElementById('joinRoomCode').value.toUpperCase().trim();
+            const password = document.getElementById('joinPassword').value;
+            
+            if (!roomCodeInput) {
+                showError('Masukkan kode room!');
+                return;
+            }
+
+            console.log('Joining room:', roomCodeInput, 'Team:', selectedTeam);
+            updateDebugInfo(`Join room: ${roomCodeInput}, Team: ${selectedTeam}`);
+
+            // Ambil data room terbaru
+            const room = await getRoom(roomCodeInput);
+            if (!room) {
+                showError('Room tidak ditemukan! Pastikan kode room benar.');
+                return;
+            }
+
+            // Cek password
+            if (room.password && room.password !== password) {
+                showError('Password room salah!');
+                return;
+            }
+
+            // Cari slot kosong di team yang dipilih
+            const targetTeam = selectedTeam === 'A' ? room.teams.teamA : room.teams.teamB;
+            let emptySlot = null;
+            let playerNumber = null;
+            
+            for (let player of targetTeam) {
+                if (!player.name) {
+                    emptySlot = player;
+                    playerNumber = player.playerNumber;
+                    break;
+                }
+            }
+
+            if (!emptySlot) {
+                showError(`Team ${selectedTeam} sudah penuh! Pilih team lain.`);
+                return;
+            }
+
+            // Set game data
+            gameData.roomCode = roomCodeInput;
+            gameData.isCreator = false;
+            gameData.playerNumber = playerNumber;
+            gameData.gameMode = room.gameMode || 'single';
+            gameData.teamMode = room.teamMode || '1v1';
+            gameData.selectedTeam = selectedTeam;
+
+            // Isi slot kosong
+            emptySlot.name = gameData.playerName;
+            emptySlot.pilihan = null;
+            emptySlot.confirmed = false;
+            
+            // Update status room
+            const totalPlayers = room.teams.teamA.filter(p => p.name).length + 
+                                room.teams.teamB.filter(p => p.name).length;
+            const requiredPlayers = (room.teamSize || 1) * 2;
+            
+            room.status = totalPlayers >= requiredPlayers ? 'ready' : 'waiting';
+            
+            // Tambah chat message
+            if (!room.chatMessages) room.chatMessages = [];
+            room.chatMessages.push({
+                type: 'system',
+                message: `🎮 ${gameData.playerName} bergabung ke Team ${selectedTeam}!`,
+                timestamp: new Date().toISOString()
+            });
+
+            // Simpan ke database
+            const success = await saveRoom(gameData.roomCode, room);
+            if (success) {
+                showSuccess(`Berhasil join room ${gameData.roomCode} di Team ${selectedTeam}! 🎮`);
+                enterGameRoom();
+                playSound();
+                
+                // Reset form
+                document.getElementById('joinRoomCode').value = '';
+                document.getElementById('joinPassword').value = '';
+            } else {
+                showError('Gagal join room! Coba lagi.');
+            }
+            
+            // Reset state
+            roomInfo = null;
+            selectedTeam = null;
+        }
+
+        function copyRoomCode() {
+            const roomCode = gameData.roomCode;
+            navigator.clipboard.writeText(roomCode).then(function() {
+                showSuccess('Kode room disalin: ' + roomCode);
+            }).catch(function(err) {
+                // Fallback untuk browser lama
+                const tempInput = document.createElement('input');
+                tempInput.value = roomCode;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+                showSuccess('Kode room disalin: ' + roomCode);
+            });
+            playSound();
+        }
+
+        function enterGameRoom() {
+            showSection('sectionGame');
+            resetChoiceUI();
+            startRoomListener(gameData.roomCode, updateRoomDisplay);
+            
+            // Setup chat input
+            const chatInput = document.getElementById('chatInput');
+            chatInput.onkeypress = function(e) {
+                if (e.key === 'Enter') {
+                    sendChatMessage();
+                }
+            };
+            
+            // Load initial room state
+            loadRoomState();
+        }
+
+        async function loadRoomState() {
+            const room = await getRoom(gameData.roomCode);
+            if (room) {
+                updateRoomDisplay(room);
+            }
+        }
+
+        function resetChoiceUI() {
+            document.getElementById('pilihanSection').style.display = 'block';
+            document.getElementById('confirmationSection').style.display = 'none';
+            gameData.tempChoice = null;
+            
+            document.querySelectorAll('.btn-pilihan').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+        }
+
+        async function sendChatMessage() {
+            const chatInput = document.getElementById('chatInput');
+            const message = chatInput.value.trim();
+            
+            if (!message) return;
+            
+            const room = await getRoom(gameData.roomCode);
+            if (!room) return;
+            
+            room.chatMessages.push({
+                type: 'player',
+                player: gameData.playerName,
+                message: message,
+                timestamp: new Date().toISOString()
+            });
+            
+            await saveRoom(gameData.roomCode, room);
+            chatInput.value = '';
+            playSound();
+        }
+
+        function updateChatDisplay(room) {
+            if (!room || !room.chatMessages) return;
+            
+            const chatMessagesDiv = document.getElementById('chatMessages');
+            chatMessagesDiv.innerHTML = '';
+            
+            room.chatMessages.forEach(msg => {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `chat-message ${msg.type}`;
+                
+                if (msg.type === 'system') {
+                    messageDiv.innerHTML = `💬 ${msg.message}`;
+                } else {
+                    const isOwnMessage = msg.player === gameData.playerName;
+                    messageDiv.className = `chat-message ${isOwnMessage ? 'player' : 'opponent'}`;
+                    messageDiv.innerHTML = `<strong>${msg.player}:</strong> ${msg.message}`;
+                }
+                
+                chatMessagesDiv.appendChild(messageDiv);
+            });
+            
+            chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
+        }
+
+        // UPDATE ROOM DISPLAY - Real-time dari Supabase
+        function updateRoomDisplay(room) {
+            if (!room) {
+                showError('Room tidak ditemukan!');
+                leaveRoom();
+                return;
+            }
+            
+            console.log('Updating room display:', room);
+            
+            document.getElementById('displayRoomCode').innerHTML = 
+                `ROOM-${gameData.roomCode} (${room.teamMode})<br>
+                 <button class="copy-btn" onclick="copyRoomCode()">📋 Copy Kode Room</button>`;
+            
+            document.getElementById('roomTaruhan').textContent = `Rp ${formatRupiah(room.taruhan)}`;
+            document.getElementById('roomMode').textContent = `${getModeDisplayName(room.gameMode)} - ${room.teamMode}`;
+            document.getElementById('roomTeamMode').textContent = room.teamMode || '1v1';
+            
+            updateChatDisplay(room);
+            
+            // Update display berdasarkan mode tim
+            if (room.teamMode && room.teamMode !== '1v1') {
+                document.getElementById('teamDisplay').style.display = 'block';
+                document.getElementById('playerDisplay').style.display = 'none';
+                updateTeamDisplay(room);
+            } else {
+                document.getElementById('teamDisplay').style.display = 'none';
+                document.getElementById('playerDisplay').style.display = 'block';
+                updatePlayerDisplay(room);
+            }
+            
+            // Update score display untuk multi-round modes
+            if (room.gameMode !== 'single') {
+                document.getElementById('scoreDisplay').style.display = 'block';
+                document.getElementById('scoreValue').textContent = 
+                    `${room.scores.teamA || 0} - ${room.scores.teamB || 0}`;
+                document.getElementById('roundInfo').textContent = `Ronde ${room.currentRound || 1}`;
+            } else {
+                document.getElementById('scoreDisplay').style.display = 'none';
+            }
+            
+            // Update room status
+            if (room.status === 'finished') {
+                document.getElementById('roomStatus').textContent = 'Permainan selesai!';
+                // Trigger cleanup untuk room yang sudah selesai
+                cleanupFinishedRoom(gameData.roomCode);
+            } else {
+                // Cek apakah semua pemain sudah konfirmasi
+                const allPlayers = [...room.teams.teamA, ...room.teams.teamB];
+                const allConfirmed = allPlayers.filter(p => p.name).every(p => p.confirmed);
+                
+                if (allConfirmed) {
+                    document.getElementById('roomStatus').textContent = 'Semua player READY!';
+                    // Hitung hasil jika semua pemain sudah konfirmasi
+                    setTimeout(() => calculateTeamResult(room), 1000);
+                } else {
+                    document.getElementById('roomStatus').textContent = 
+                        room.teams.teamB.some(p => p.name) ? 'Silakan pilih dan konfirmasi...' : 'Menunggu player...';
+                }
+            }
+            
+            // Update player count
+            const totalPlayers = room.teams.teamA.filter(p => p.name).length + 
+                                room.teams.teamB.filter(p => p.name).length;
+            const requiredPlayers = room.teamSize * 2;
+            document.getElementById('playerCount').textContent = `${totalPlayers}/${requiredPlayers}`;
+
+            // Show/hide choice sections based on game state
+            const currentPlayer = findCurrentPlayer(room);
+            if (currentPlayer && !currentPlayer.confirmed && room.status !== 'finished') {
+                document.getElementById('pilihanSection').style.display = 'block';
+                document.getElementById('confirmationSection').style.display = 'none';
+            } else {
+                document.getElementById('pilihanSection').style.display = 'none';
+                document.getElementById('confirmationSection').style.display = 'none';
+            }
+
+            // Show results if game finished
+            if (room.status === 'finished' && room.hasil) {
+                document.getElementById('hasilSection').style.display = 'block';
+                updateResultDisplay(room);
+            } else {
+                document.getElementById('hasilSection').style.display = 'none';
+            }
+        }
+
+        function updateTeamDisplay(room) {
+            const teamSize = room.teamSize || 1;
+            
+            // Update team A
+            let teamAHTML = '';
+            room.teams.teamA.forEach(player => {
+                const status = getPlayerStatus(player);
+                teamAHTML += `
+                    <div class="team-player ${status.class}">
+                        <div><strong>${player.name || 'Menunggu...'}</strong></div>
+                        <div>${status.text}</div>
+                    </div>
+                `;
+            });
+            document.getElementById('teamAPlayers').innerHTML = teamAHTML;
+            
+            // Update team B
+            let teamBHTML = '';
+            room.teams.teamB.forEach(player => {
+                const status = getPlayerStatus(player);
+                teamBHTML += `
+                    <div class="team-player ${status.class}">
+                        <div><strong>${player.name || 'Menunggu...'}</strong></div>
+                        <div>${status.text}</div>
+                    </div>
+                `;
+            });
+            document.getElementById('teamBPlayers').innerHTML = teamBHTML;
+        }
+
+        function updatePlayerDisplay(room) {
+            // Update player 1
+            document.getElementById('player1Name').textContent = room.teams.teamA[0].name || '-';
+            
+            if (room.teams.teamA[0].confirmed) {
+                document.getElementById('player1Status').textContent = '✅ READY';
+                document.getElementById('player1Slot').className = 'player confirmed';
+            } else if (room.teams.teamA[0].pilihan) {
+                document.getElementById('player1Status').textContent = 'Memilih...';
+                document.getElementById('player1Slot').className = 'player choosed';
+            } else {
+                document.getElementById('player1Status').textContent = 'Belum memilih';
+                document.getElementById('player1Slot').className = 'player';
+            }
+
+            // Update player 2
+            if (room.teams.teamB[0]) {
+                document.getElementById('player2Name').textContent = room.teams.teamB[0].name || '-';
+                
+                if (room.teams.teamB[0].confirmed) {
+                    document.getElementById('player2Status').textContent = '✅ READY';
+                    document.getElementById('player2Slot').className = 'player confirmed';
+                } else if (room.teams.teamB[0].pilihan) {
+                    document.getElementById('player2Status').textContent = 'Memilih...';
+                    document.getElementById('player2Slot').className = 'player choosed';
+                } else {
+                    document.getElementById('player2Status').textContent = 'Belum memilih';
+                    document.getElementById('player2Slot').className = 'player';
+                }
+            } else {
+                document.getElementById('player2Name').textContent = '-';
+                document.getElementById('player2Status').textContent = 'Menunggu...';
+                document.getElementById('player2Slot').className = 'player';
+            }
+        }
+
+        function getPlayerStatus(player) {
+            if (!player.name) {
+                return { text: 'Menunggu...', class: '' };
+            } else if (player.confirmed) {
+                return { text: '✅ READY', class: 'confirmed' };
+            } else if (player.pilihan) {
+                return { text: 'Memilih...', class: 'choosed' };
+            } else {
+                return { text: 'Belum memilih', class: '' };
+            }
+        }
+
+        function findCurrentPlayer(room) {
+            const allPlayers = [...room.teams.teamA, ...room.teams.teamB];
+            return allPlayers.find(player => player.playerNumber === gameData.playerNumber);
+        }
+
+        function selectChoice(pilihan) {
+            gameData.tempChoice = pilihan;
+            
+            document.querySelectorAll('.btn-pilihan').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            event.target.classList.add('selected');
+            
+            document.getElementById('pilihanSection').style.display = 'none';
+            document.getElementById('confirmationSection').style.display = 'block';
+            document.getElementById('selectedChoice').textContent = pilihan.toUpperCase();
+            
+            playSound();
+        }
+
+        async function confirmChoice() {
+            if (!gameData.tempChoice) {
+                showError('Pilih pilihan dulu!');
+                return;
+            }
+
+            const room = await getRoom(gameData.roomCode);
+            if (!room) {
+                showError('Room tidak ditemukan!');
+                return;
+            }
+
+            const currentPlayer = findCurrentPlayer(room);
+            if (!currentPlayer) {
+                showError('Player tidak ditemukan!');
+                return;
+            }
+
+            currentPlayer.pilihan = gameData.tempChoice;
+            currentPlayer.confirmed = true;
+            
+            room.chatMessages.push({
+                type: 'system',
+                message: `✅ ${gameData.playerName} sudah memilih!`,
+                timestamp: new Date().toISOString()
+            });
+
+            // Cek apakah semua pemain sudah memilih
+            const allPlayers = [...room.teams.teamA, ...room.teams.teamB];
+            const allConfirmed = allPlayers.filter(p => p.name).every(p => p.confirmed);
+            
+            if (allConfirmed) {
+                setTimeout(() => calculateTeamResult(room), 1000);
+            }
+            
+            const success = await saveRoom(gameData.roomCode, room);
+            
+            if (success) {
+                showSuccess('Pilihan dikonfirmasi! ✅');
+                resetChoiceUI();
+                playSound();
+            } else {
+                showError('Gagal menyimpan pilihan! Coba lagi.');
+            }
+        }
+
+        function cancelChoice() {
+            resetChoiceUI();
+            showSuccess('Pilihan dibatalkan');
+            playSound();
+        }
+
+        // Fungsi baru untuk menghitung hasil team
+        async function calculateTeamResult(roomData) {
+            let room = roomData;
+            if (!room) {
+                room = await getRoom(gameData.roomCode);
+            }
+            
+            if (!room) return;
+            
+            const teamSize = room.teamSize || 1;
+            let teamAPoints = 0;
+            let teamBPoints = 0;
+            
+            // Hitung poin untuk setiap pertandingan antar pemain
+            for (let i = 0; i < teamSize; i++) {
+                const playerA = room.teams.teamA[i];
+                const playerB = room.teams.teamB[i];
+                
+                if (!playerA.pilihan || !playerB.pilihan) continue;
+                
+                const result = determineWinner(playerA.pilihan, playerB.pilihan);
+                
+                if (result === 1) {
+                    teamAPoints++;
+                } else if (result === 2) {
+                    teamBPoints++;
+                }
+                // Seri tidak memberikan poin
+            }
+            
+            let roundWinner = null;
+            let roundMessage = '';
+
+            if (teamAPoints > teamBPoints) {
+                roundWinner = 'teamA';
+                roundMessage = `TEAM A menang Ronde ${room.currentRound}! (${teamAPoints}-${teamBPoints})`;
+                room.scores.teamA = (room.scores.teamA || 0) + 1;
+            } else if (teamBPoints > teamAPoints) {
+                roundWinner = 'teamB';
+                roundMessage = `TEAM B menang Ronde ${room.currentRound}! (${teamAPoints}-${teamBPoints})`;
+                room.scores.teamB = (room.scores.teamB || 0) + 1;
+            } else {
+                roundWinner = 'seri';
+                roundMessage = `Ronde ${room.currentRound} SERI! (${teamAPoints}-${teamBPoints})`;
+            }
+
+            // Simpan history ronde
+            room.roundHistory.push({
+                round: room.currentRound,
+                teamAPoints: teamAPoints,
+                teamBPoints: teamBPoints,
+                winner: roundWinner,
+                choices: {
+                    teamA: room.teams.teamA.map(p => p.pilihan),
+                    teamB: room.teams.teamB.map(p => p.pilihan)
+                }
+            });
+
+            // Cek apakah game sudah selesai berdasarkan mode
+            let gameFinished = false;
+            let finalWinner = null;
+            let finalMessage = '';
+
+            if (room.gameMode === 'single') {
+                gameFinished = true;
+                finalWinner = roundWinner;
+                finalMessage = roundWinner === 'seri' ? 'SERI!' : 
+                             roundWinner === 'teamA' ? 'TEAM A MENANG! 🎉' : 
+                             'TEAM B MENANG! 🎉';
+            } 
+            else if (room.gameMode === 'bo3') {
+                if (room.scores.teamA >= 2) {
+                    gameFinished = true;
+                    finalWinner = 'teamA';
+                    finalMessage = 'TEAM A MENANG Best of 3! 🏆';
+                } else if (room.scores.teamB >= 2) {
+                    gameFinished = true;
+                    finalWinner = 'teamB';
+                    finalMessage = 'TEAM B MENANG Best of 3! 🏆';
+                } else if (room.currentRound >= 3 && room.scores.teamA === room.scores.teamB) {
+                    gameFinished = true;
+                    finalWinner = 'seri';
+                    finalMessage = 'SERI Best of 3!';
+                }
+            }
+
+            if (gameFinished) {
+                let totalPot = room.taruhan * (teamSize * 2); // Total taruhan semua pemain
+                let feeAdmin = calculateAdminFee(totalPot / 2); // Fee berdasarkan taruhan per orang
+                let hadiahBersih = totalPot - feeAdmin;
+
+                room.hasil = { 
+                    pemenang: finalWinner, 
+                    hasil: finalMessage,
+                    teamAPoints: teamAPoints,
+                    teamBPoints: teamBPoints,
+                    totalPot: totalPot,
+                    feeAdmin: feeAdmin,
+                    hadiahBersih: hadiahBersih,
+                    scores: room.scores,
+                    roundHistory: room.roundHistory
+                };
+                room.status = 'finished';
+                
+                room.chatMessages.push({
+                    type: 'system',
+                    message: `🏆 ${finalMessage}`,
+                    timestamp: new Date().toISOString()
+                });
+
+                // Tampilkan efek Victory/Defeat
+                setTimeout(() => {
+                    if (finalWinner === 'seri') {
+                        // Tidak tampilkan efek untuk seri
+                    } else {
+                        const currentTeam = getCurrentPlayerTeam(room);
+                        if (finalWinner === currentTeam) {
+                            showVictory();
+                        } else {
+                            showDefeat();
+                        }
+                    }
+                }, 500);
+            } else {
+                // Lanjut ke ronde berikutnya
+                room.currentRound++;
+                
+                // Reset pilihan semua pemain
+                [...room.teams.teamA, ...room.teams.teamB].forEach(player => {
+                    if (player.name) {
+                        player.pilihan = null;
+                        player.confirmed = false;
+                    }
+                });
+                
+                room.chatMessages.push({
+                    type: 'system',
+                    message: `🔄 ${roundMessage} Menuju Ronde ${room.currentRound}!`,
+                    timestamp: new Date().toISOString()
+                });
+            }
+            
+            await saveRoom(gameData.roomCode, room);
+            playSound();
+        }
+
+        function determineWinner(p1, p2) {
+            if (p1 === p2) return 0; // Seri
+            
+            if (
+                (p1 === 'batu' && p2 === 'gunting') ||
+                (p1 === 'gunting' && p2 === 'kertas') ||
+                (p1 === 'kertas' && p2 === 'batu')
+            ) {
+                return 1; // Player 1 menang
+            }
+            
+            return 2; // Player 2 menang
+        }
+
+        function getCurrentPlayerTeam(room) {
+            const currentPlayer = findCurrentPlayer(room);
+            if (room.teams.teamA.some(p => p.playerNumber === currentPlayer.playerNumber)) {
+                return 'teamA';
+            }
+            return 'teamB';
+        }
+
+        // Modifikasi updateResultDisplay untuk team mode
+        function updateResultDisplay(room) {
+            if (!room.hasil) return;
+
+            const hasil = room.hasil;
+            
+            let historyHTML = '';
+            if (room.roundHistory && room.roundHistory.length > 0) {
+                historyHTML = '<div style="margin: 10px 0; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 5px;">';
+                historyHTML += '<strong>Riwayat Ronde:</strong><br>';
+                room.roundHistory.forEach(round => {
+                    let roundResult = '';
+                    if (round.winner === 'seri') {
+                        roundResult = 'SERI';
+                    } else if (round.winner === 'teamA') {
+                        roundResult = 'TEAM A Menang';
+                    } else {
+                        roundResult = 'TEAM B Menang';
+                    }
+                    historyHTML += `Ronde ${round.round}: ${round.teamAPoints}-${round.teamBPoints} → ${roundResult}<br>`;
+                });
+                historyHTML += `</div><p><strong>Final Score: ${room.scores.teamA} - ${room.scores.teamB}</strong></p>`;
+            }
+            
+            // Tampilkan pilihan semua pemain
+            let choicesHTML = '<div style="display: flex; justify-content: space-between; margin: 10px 0;">';
+            
+            // Team A choices
+            choicesHTML += '<div style="flex: 1; text-align: center;">';
+            choicesHTML += '<strong>TEAM A:</strong><br>';
+            room.teams.teamA.forEach((player, index) => {
+                choicesHTML += `${player.name}: ${player.pilihan ? player.pilihan.toUpperCase() : 'BELUM MEMILIH'}<br>`;
+            });
+            choicesHTML += '</div>';
+            
+            // VS
+            choicesHTML += '<div style="flex: 0; padding: 0 20px; align-self: center;">VS</div>';
+            
+            // Team B choices
+            choicesHTML += '<div style="flex: 1; text-align: center;">';
+            choicesHTML += '<strong>TEAM B:</strong><br>';
+            room.teams.teamB.forEach((player, index) => {
+                choicesHTML += `${player.name}: ${player.pilihan ? player.pilihan.toUpperCase() : 'BELUM MEMILIH'}<br>`;
+            });
+            choicesHTML += '</div>';
+            
+            choicesHTML += '</div>';
+            
+            document.getElementById('hasilPertandingan').innerHTML = `
+                ${historyHTML}
+                ${choicesHTML}
+            `;
+
+            const statusElement = document.getElementById('statusPemenang');
+            statusElement.textContent = hasil.hasil;
+            statusElement.className = hasil.pemenang === 'seri' ? 'seri' : 'menang';
+
+            let pembayaranHTML = '';
+            if (hasil.pemenang === 'seri') {
+                pembayaranHTML = `
+                    <p>💰 Total Taruhan: Rp ${formatRupiah(hasil.totalPot)}</p>
+                    <p>🏦 Fee Admin: Rp ${formatRupiah(hasil.feeAdmin)}</p>
+                    <p>🔙 Dana dikembalikan ke masing-masing player</p>
+                `;
+            } else {
+                const pemenangName = hasil.pemenang === 'teamA' ? 'TEAM A' : 'TEAM B';
+                const teamSize = room.teamSize || 1;
+                const hadiahPerPlayer = Math.floor(hasil.hadiahBersih / teamSize);
+                
+                pembayaranHTML = `
+                    <p>💰 Total Pot: Rp ${formatRupiah(hasil.totalPot)}</p>
+                    <p>🏦 Fee Admin: Rp ${formatRupiah(hasil.feeAdmin)}</p>
+                    <p>🎁 Hadiah Bersih: Rp ${formatRupiah(hasil.hadiahBersih)}</p>
+                    <p>👑 ${pemenangName} mendapatkan: Rp ${formatRupiah(hadiahPerPlayer)} per pemain</p>
+                `;
+            }
+            
+            document.getElementById('pembayaranInfo').innerHTML = pembayaranHTML;
+            document.getElementById('hasilSection').style.display = 'block';
+        }
+
+        // Modifikasi rematch untuk team mode
+        async function rematch() {
+            hideOverlay();
+            
+            const room = await getRoom(gameData.roomCode);
+            
+            // Reset pilihan semua pemain
+            [...room.teams.teamA, ...room.teams.teamB].forEach(player => {
+                if (player.name) {
+                    player.pilihan = null;
+                    player.confirmed = false;
+                }
+            });
+            
+            room.status = 'ready';
+            room.hasil = null;
+            room.showChoices = false;
+            room.scores = { teamA: 0, teamB: 0 };
+            room.currentRound = 1;
+            room.roundHistory = [];
+            
+            room.chatMessages.push({
+                type: 'system',
+                message: '🔄 Memulai permainan baru!',
+                timestamp: new Date().toISOString()
+            });
+            
+            document.getElementById('hasilSection').style.display = 'none';
+            await saveRoom(gameData.roomCode, room);
+            resetChoiceUI();
+            playSound();
+        }
+
+        // Modifikasi leaveRoom untuk team mode
+        async function leaveRoom() {
+            hideOverlay();
+            stopRoomListener();
+            
+            const room = await getRoom(gameData.roomCode);
+            if (room) {
+                // Cari dan hapus player yang leave
+                const allPlayers = [...room.teams.teamA, ...room.teams.teamB];
+                const playerIndex = allPlayers.findIndex(p => p.playerNumber === gameData.playerNumber);
+                
+                if (playerIndex !== -1) {
+                    // Tentukan team player
+                    const team = room.teams.teamA.some(p => p.playerNumber === gameData.playerNumber) ? 'teamA' : 'teamB';
+                    const playerInTeam = room.teams[team].find(p => p.playerNumber === gameData.playerNumber);
+                    
+                    if (playerInTeam) {
+                        playerInTeam.name = null;
+                        playerInTeam.pilihan = null;
+                        playerInTeam.confirmed = false;
+                    }
+                }
+                
+                room.chatMessages.push({
+                    type: 'system',
+                    message: `🚪 ${gameData.playerName} meninggalkan room`,
+                    timestamp: new Date().toISOString()
+                });
+                
+                // Jika creator leave, hapus room
+                if (gameData.isCreator) {
+                    await deleteRoom(gameData.roomCode);
+                } else {
+                    await saveRoom(gameData.roomCode, room);
+                }
+            }
+            
+            showSection('sectionLobby');
+            updateRoomStats();
+            playSound();
+        }
+
+        function formatRupiah(angka) {
+            return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        // Test koneksi Supabase
+        async function testSupabaseConnection() {
+            try {
+                const { data, error } = await supabase
+                    .from('rooms')
+                    .select('count')
+                    .limit(1);
+                
+                const statusElement = document.getElementById('connectionStatus');
+                const detailsElement = document.getElementById('connectionDetails');
+                
+                if (error) {
+                    statusElement.textContent = '❌ Gagal';
+                    detailsElement.textContent = `Error: ${error.message}`;
+                    updateDebugInfo(`Koneksi gagal: ${error.message}`);
+                    
+                    // Cek apakah tabel 'rooms' ada
+                    if (error.message.includes('does not exist')) {
+                        showError('Tabel "rooms" belum dibuat di Supabase. Silakan buat tabel terlebih dahulu.');
+                    }
+                } else {
+                    statusElement.textContent = '✅ Terhubung';
+                    detailsElement.textContent = '';
+                    updateDebugInfo('Koneksi Supabase berhasil');
+                }
+            } catch (error) {
+                console.error('Connection test error:', error);
+                updateDebugInfo(`Test koneksi error: ${error.message}`);
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default player name
+            document.getElementById('playerName').value = gameData.playerName;
+            updateRoomStats();
+            
+            // Test koneksi Supabase
+            testSupabaseConnection();
+            
+            // Start auto-cleanup (setiap 6 jam)
+            setInterval(cleanupOldRooms, 6 * 60 * 60 * 1000);
+            
+            // Run cleanup sekali saat start
+            setTimeout(cleanupOldRooms, 5000);
+            
+            console.log('Game initialized with Supabase + Auto-Cleanup + Team Mode + Victory/Defeat Effects + Team Selection');
+        });
+    </script>
+</body>
+</html>
